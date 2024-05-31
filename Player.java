@@ -10,16 +10,18 @@ public class Player extends Actor
 {
     private World w;
     private static int speed;
+    private int jumpActs = 0;
     public void addedToWorld(World w){
         this.w = w;
     }
-    
+
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
-    {   
+    {
+        jumpActs--;
         // Movement
         if (Greenfoot.isKeyDown("D")){
             setLocation(getX()+2, getY());
@@ -30,13 +32,19 @@ public class Player extends Actor
             speed = -2;
         }
         // Jump
-        if (Greenfoot.isKeyDown("Space") && isTouching(Block.class)){
-            for (int i = 0; i < 20; i+=2){
-                setLocation(getX(), getY()-i);
+        if (Greenfoot.isKeyDown("Space") && isTouching(Brick.class)){
+            jumpActs = 30;
+        }
+        if (jumpActs!=0){
+            if (jumpActs > 15){
+                setLocation(getX(), getY() - 10);
+            }
+            if (jumpActs < 15 && !isTouching(Brick.class)){
+                setLocation(getX(), getY() + 8);
             }
         }
         // Fall
-        if (!isTouching(Block.class)){
+        if (!isTouching(Brick.class)){
             setLocation(getX(), getY()+2);
         }
         // Boundary

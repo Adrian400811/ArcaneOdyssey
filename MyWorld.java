@@ -32,4 +32,12 @@ public class MyWorld extends World
     public void act(){
         scroll.scroll(getWidth()/2-player.getX(), getHeight()/2-player.getY());
     }
+    
+    public void spawnTerrain(int[][] identifier){
+        for (int i = 0; i < identifier.length; i++){
+            for (int j = 0; j < identifier[i].length; j++){
+                
+            }
+        }
+    }
 }

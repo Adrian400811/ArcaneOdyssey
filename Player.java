@@ -9,12 +9,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Actor
 {
     private static int speed;
+    private int jumpActs = 0;
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
+        jumpActs--;
         if (Greenfoot.isKeyDown("D")){
             setLocation(getX()+2, getY());
             speed = 2;
@@ -22,8 +24,13 @@ public class Player extends Actor
             setLocation(getX()-2, getY());
             speed = -2;
         } if (Greenfoot.isKeyDown("Space") && isTouching(Brick.class)){
-            for (int i = 0; i < 20; i+=2){
-                setLocation(getX(), getY()-i);
+            jumpActs = 30;
+        } if (jumpActs!=0){
+            if (jumpActs > 15){
+                setLocation(getX(), getY() - 10);
+            } 
+            if (jumpActs < 15 && !isTouching(Brick.class)){
+                setLocation(getX(), getY() + 8);
             }
         } if (!isTouching(Brick.class)){
             setLocation(getX(), getY()+2);

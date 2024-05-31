@@ -2,7 +2,7 @@ name: FormatFix
 
 on:
   push:
-    branches: [ format-check ]
+    branches: [ release-candidate ]
 
 jobs:
 

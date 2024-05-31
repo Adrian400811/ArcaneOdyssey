@@ -21,11 +21,11 @@ public class Player extends Actor
         } if (Greenfoot.isKeyDown("A")){
             setLocation(getX()-2, getY());
             speed = -2;
-        } if (Greenfoot.isKeyDown("Space") && isTouching(Block.class)){
+        } if (Greenfoot.isKeyDown("Space") && isTouching(Brick.class)){
             for (int i = 0; i < 20; i+=2){
                 setLocation(getX(), getY()-i);
             }
-        } if (!isTouching(Block.class)){
+        } if (!isTouching(Brick.class)){
             setLocation(getX(), getY()+2);
         } if (getX() < 0){
             setLocation(0,getY());

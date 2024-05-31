@@ -11,6 +11,7 @@ public class MyWorld extends World
     private ImgScroll scroll;
     private Player player;
     private int[][] blockGeneration;
+    private Orb orb;
 
     /**
      * Constructor for objects of class MyWorld.
@@ -27,17 +28,19 @@ public class MyWorld extends World
                 addObject(new Brick(), 0+i, 700);
             }
         }
-        blockGeneration = new int[40][20];
+        blockGeneration = new int[40][10];
         blockGeneration[10][5] = 1;
         blockGeneration[11][5] = 1;
         blockGeneration[12][5] = 1;
         blockGeneration[28][5] = 1;
+        blockGeneration[10][8] = 2;
         spawnTerrain(blockGeneration);
     }
     
     
     public void act(){
         scroll.scroll(getWidth()/2-player.getX(), getHeight()/2-player.getY());
+        checkNext();
     }
     
     /**
@@ -50,8 +53,18 @@ public class MyWorld extends World
                 if (identifier[i][j] == 1){
                     // i represents the X-values and j represents the y-values
                     addObject(new Brick(), i*64, j*72);
+                } 
+                if (identifier[i][j] == 2){
+                    addObject(orb = new Orb(), i*64, j*72);
                 }
             }
+        }
+    }
+    
+    public void checkNext(){
+        if (orb.isBeingTouched()){
+            Level1 world = new Level1();
+            Greenfoot.setWorld(world);
         }
     }
 }

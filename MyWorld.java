@@ -1,6 +1,4 @@
-import greenfoot.Greenfoot;
-import greenfoot.GreenfootImage;
-import greenfoot.World;
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class MyWorld here.
@@ -11,6 +9,7 @@ import greenfoot.World;
 public class MyWorld extends World {
     private final ImgScroll scroll;
     private final Player player;
+    private int[][] blockGeneration;
     private Orb orb;
 
     /**
@@ -21,17 +20,22 @@ public class MyWorld extends World {
         super(1280, 720, 1, false);
         addObject(player = new Player(), 100, 622);
         scroll = new ImgScroll(this, new GreenfootImage("2dPixelForestBackground.png"), 2560, 720);
-        for (int j = 0; j < scroll.getScrollHeight() - 100; j += 300) {
-            for (int i = 0; i < scroll.getScrollWidth(); i += 106) {
-                addObject(new Brick(), i, 700);
+        // Flooring
+        for (int j=0; j<scroll.getScrollHeight()-100; j+=300){
+            for (int i=0; i<scroll.getScrollWidth(); i+=106){
+                addObject(new Brick(), 0+i, 700);
             }
         }
-        int[][] blockGeneration = new int[40][10];
+        // Individual Block Placement
+        blockGeneration = new int[40][10];
         blockGeneration[10][5] = 1;
         blockGeneration[11][5] = 1;
         blockGeneration[12][5] = 1;
         blockGeneration[28][5] = 1;
-        blockGeneration[10][8] = 2;
+        blockGeneration[10][6] = 2;
+        blockGeneration[10][9] = 1;
+        blockGeneration[10][9] = 1;
+        blockGeneration[5][7] = 1;
         spawnTerrain(blockGeneration);
     }
 

@@ -1,15 +1,21 @@
-import greenfoot.*;
 import java.util.ArrayList;
+
 public class RedBee extends Bee {
     private final int speed = 2;
     private int area;
 
     public RedBee() {
-
+        area = 1280;
     }
 
     public RedBee(int area) {
         this.area = area;
+    }
+
+    @Override
+    public void act() {
+        super.act();
+        followNearestP();
     }
 
     /**
@@ -29,9 +35,9 @@ public class RedBee extends Bee {
      * <a href="https://www.greenfoot.org/topics/4911">...</a>
      */
     public Player getPlayer() {
-        ArrayList<Player> pNear = (ArrayList<Player>) getObjectsInRange(1280,Player.class);
+        ArrayList<Player> pNear = (ArrayList<Player>) getObjectsInRange(area, Player.class);
         Player nearestP = null;
-        if (!pNear.isEmpty()){
+        if (!pNear.isEmpty()) {
             nearestP = pNear.get(0);
         }
         return nearestP;
@@ -42,7 +48,7 @@ public class RedBee extends Bee {
      */
     public void followNearestP() {
         Player p = getPlayer();
-        if(p != null){
+        if (p != null) {
             turnTowards(p);
             move(speed);
         }

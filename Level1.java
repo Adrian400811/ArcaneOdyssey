@@ -8,7 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level1 extends World
 {
+    private ImgScroll scroll;
     private int[][] blockGeneration;
+    private Orb orb;
+    private Player player;
     
     /**
      * Constructor for objects of class Level1.
@@ -17,5 +20,39 @@ public class Level1 extends World
     public Level1()
     {
         super(1280, 720, 1, false); 
+        addObject(player = new Player(), 100, 622);
+        scroll = new ImgScroll(this, new GreenfootImage("2dSpaceBackground.png"), 2560, 720);
+        // Flooring
+        for (int j=0; j<scroll.getScrollHeight()-100; j+=300){
+            for (int i=0; i<scroll.getScrollWidth(); i+=106){
+                addObject(new Brick(), 0+i, 700);
+            }
+        }
+        // Individual Block Placement
+        blockGeneration = new int[40][10];
+        blockGeneration[2][5] = 1;
+        spawnTerrain(blockGeneration);
+    }
+    
+    public void act(){
+        scroll.scroll(getWidth()/2-player.getX(), getHeight()/2-player.getY());
+    }
+    
+    /**
+     * NOTE - Use a 2d array of [40][10] for this to work as intended
+     * Each value in the array represents 64x and 72y
+     */
+    public void spawnTerrain(int[][] identifier){
+        for (int i = 0; i < identifier.length; i++){
+            for (int j = 0; j < identifier[i].length; j++){
+                if (identifier[i][j] == 1){
+                    // i represents the X-values and j represents the y-values
+                    addObject(new Brick(), i*64, j*72);
+                } 
+                if (identifier[i][j] == 2){
+                    addObject(orb = new Orb(), i*64, j*72);
+                }
+            }
+        }
     }
 }

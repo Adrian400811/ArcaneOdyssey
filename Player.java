@@ -24,12 +24,12 @@ public class Player extends Actor
         jumpActs--;
         // Movement
         if (Greenfoot.isKeyDown("D")){
-            setLocation(getX()+2, getY());
-            speed = 2;
+            setLocation(getX()+8, getY());
+            speed = 8;
         }
         if (Greenfoot.isKeyDown("A")){
-            setLocation(getX()-2, getY());
-            speed = -2;
+            setLocation(getX()-8, getY());
+            speed = -8;
         }
         // Jump
         if (Greenfoot.isKeyDown("Space") && isTouching(Brick.class)){
@@ -38,6 +38,11 @@ public class Player extends Actor
         if (jumpActs!=0){
             if (jumpActs > 15){
                 setLocation(getX(), getY() - 10);
+                    //If Player hits head on Brick it will end the jump motion
+                    if (getOneIntersectingObject(Brick.class) != null){
+                        setLocation(getX(), getY() + 10);
+                        jumpActs = 15;
+                    }
             }
             if (jumpActs < 15 && !isTouching(Brick.class)){
                 setLocation(getX(), getY() + 8);
@@ -61,6 +66,13 @@ public class Player extends Actor
             if (getY() > w.getHeight()){
                 setLocation(getX(), w.getHeight());
             }
+        }
+        // Collision Detection
+        if (getOneObjectAtOffset(getImage().getWidth()/2, 0, Brick.class) != null){
+            setLocation(getX()-speed, getY());
+        }
+        if (getOneObjectAtOffset(-(getImage().getWidth()/2), 0, Brick.class) != null){
+            setLocation(getX()-speed, getY());
         }
     }
     

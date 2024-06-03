@@ -23,17 +23,22 @@ public class MyWorld extends World
         super(1280, 720, 1, false); 
         addObject(player = new Player(), 100, 622);
         scroll = new ImgScroll(this, new GreenfootImage("2dPixelForestBackground.png"), 2560, 720);
+        // Flooring
         for (int j=0; j<scroll.getScrollHeight()-100; j+=300){
             for (int i=0; i<scroll.getScrollWidth(); i+=106){
                 addObject(new Brick(), 0+i, 700);
             }
         }
+        // Individual Block Placement
         blockGeneration = new int[40][10];
         blockGeneration[10][5] = 1;
         blockGeneration[11][5] = 1;
         blockGeneration[12][5] = 1;
         blockGeneration[28][5] = 1;
-        blockGeneration[10][8] = 2;
+        blockGeneration[10][6] = 2;
+        blockGeneration[10][9] = 1;
+        blockGeneration[10][9] = 1;
+        blockGeneration[5][7] = 1;
         spawnTerrain(blockGeneration);
     }
     

@@ -13,19 +13,18 @@ public class RedBee extends Bee {
     }
 
     /**
-     * Get distance to a given Pedestrian 1
+     * Get distance to a given Player
      * Inspired by Gevater_Tod4177 on greenfoot.org
      * <a href="https://www.greenfoot.org/topics/4911">...</a>
      *
-     * @param p Pedestrian 1
+     * @param p Player
      */
     public double getDistance(Player p) {
         return Math.hypot(p.getX() - getX(), p.getY() - getY());
     }
 
     /**
-     * Get the nearest Pedestrian 1 by comparing distances between
-     * all the Pedestrian 1s in range
+     * Get the Player
      * Inspired by Gevater_Tod4177 on greenfoot.org
      * <a href="https://www.greenfoot.org/topics/4911">...</a>
      */
@@ -39,7 +38,7 @@ public class RedBee extends Bee {
     }
 
     /**
-     * Move towards the nearest Player using getNearestPed()
+     * Move towards the nearest Player using getPlayer()
      */
     public void followNearestP() {
         Player p = getPlayer();

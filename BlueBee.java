@@ -5,8 +5,4 @@ public class BlueBee extends Bee{
     public BlueBee(){
 
     }
-
-    public void act(){
-
-    }
 }

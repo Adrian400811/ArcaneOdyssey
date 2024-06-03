@@ -48,7 +48,7 @@ public class Player extends Actor
                 setLocation(getX(), getY() + 8);
             }
         }
-        // Fall
+        // Gravity
         if (!isTouching(Brick.class)){
             setLocation(getX(), getY()+2);
         }
@@ -78,5 +78,12 @@ public class Player extends Actor
     
     public static int getSpeed(){
         return speed;
+    }
+
+    public int[] getLocation(){
+        int[] location = new int[2];
+        location[0] = getX();
+        location[1] = getY();
+        return location;
     }
 }

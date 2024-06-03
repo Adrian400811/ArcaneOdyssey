@@ -37,16 +37,11 @@ public class Player extends Actor {
             jumpActs = 30;
         }
         if (jumpActs != 0) {
-            if (jumpActs > 15) {
-                setLocation(getX(), getY() - 10);
-                //If Player hits head on Brick it will end the jump motion
-                if (getOneIntersectingObject(Brick.class) != null) {
-                    setLocation(getX(), getY() + 10);
-                    jumpActs = 15;
-                }
-            }
-            if (jumpActs < 15 && !isTouching(Brick.class)) {
-                setLocation(getX(), getY() + 8);
+            setLocation(getX(), getY() - 10);
+            //If Player hits head on Brick it will end the jump motion
+            if (getOneIntersectingObject(Brick.class) != null) {
+                setLocation(getX(), getY() + 10);
+                jumpActs = 15;
             }
             // Gravity
             if (!isTouching(Brick.class)) {

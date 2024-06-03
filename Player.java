@@ -36,39 +36,39 @@ public class Player extends Actor {
         if (Greenfoot.isKeyDown("Space") && isTouching(Brick.class)) {
             jumpActs = 30;
         }
-        if (jumpActs != 0) {
+        if (jumpActs > 15) {
             setLocation(getX(), getY() - 10);
-            //If Player hits head on Brick it will end the jump motion
+            // End jump motion of head hits brick
             if (getOneIntersectingObject(Brick.class) != null) {
                 setLocation(getX(), getY() + 10);
                 jumpActs = 15;
             }
-            // Gravity
-            if (!isTouching(Brick.class)) {
-                setLocation(getX(), getY() + 2);
+        }
+        // Gravity
+        if (!isTouching(Brick.class)) {
+            setLocation(getX(), getY() + 2);
+        }
+        // Boundary
+        if (w != null) {
+            if (getX() < 0) {
+                setLocation(0, getY());
             }
-            // Boundary
-            if (w != null) {
-                if (getX() < 0) {
-                    setLocation(0, getY());
-                }
-                if (getX() > w.getWidth()) {
-                    setLocation(w.getWidth(), getY());
-                }
-                if (getY() < 0) {
-                    setLocation(getX(), 0);
-                }
-                if (getY() > w.getHeight()) {
-                    setLocation(getX(), w.getHeight());
-                }
+            if (getX() > w.getWidth()) {
+                setLocation(w.getWidth(), getY());
             }
-            // Collision Detection
-            if (getOneObjectAtOffset(getImage().getWidth() / 2, 0, Brick.class) != null) {
-                setLocation(getX() - speed, getY());
+            if (getY() < 0) {
+                setLocation(getX(), 0);
             }
-            if (getOneObjectAtOffset(-(getImage().getWidth() / 2), 0, Brick.class) != null) {
-                setLocation(getX() - speed, getY());
+            if (getY() > w.getHeight()) {
+                setLocation(getX(), w.getHeight());
             }
+        }
+        // Collision Detection
+        if (getOneObjectAtOffset(getImage().getWidth() / 2, 0, Brick.class) != null) {
+            setLocation(getX() - speed, getY());
+        }
+        if (getOneObjectAtOffset(-(getImage().getWidth() / 2), 0, Brick.class) != null) {
+            setLocation(getX() - speed, getY());
         }
     }
 

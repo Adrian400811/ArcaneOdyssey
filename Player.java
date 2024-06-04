@@ -69,15 +69,9 @@ public class Player extends Actor
         // Collision Detection
         if (getOneObjectAtOffset(getImage().getWidth()/2, 0, Brick.class) != null){
             setLocation(getX()-speed, getY());
-            if (jumpActs>=15){
-                setLocation(getX(), getY()+6);
-            }
         }
         if (getOneObjectAtOffset(-(getImage().getWidth()/2), 0, Brick.class) != null){
             setLocation(getX()-speed, getY());
-            if (jumpActs>=15){
-                setLocation(getX(), getY()+6);
-            }
         }
         if (getOneObjectAtOffset(0, -(getImage().getHeight()/2), Brick.class) != null){
             setLocation(getX(), getY()+6);

@@ -1,57 +1,49 @@
-import java.util.ArrayList;
-
 public class RedBee extends Bee {
-    private final int speed = 2;
-    private int area;
+    private final int range;
+    private int hp;
+    private int speed;
 
     public RedBee() {
-        area = 1280;
+        super();
+        hp = 2;
+        speed = 1;
+        range = 100;
     }
 
-    public RedBee(int area) {
-        this.area = area;
+    public RedBee(int range) {
+        this.range = range;
     }
 
     @Override
     public void act() {
         super.act();
-        followNearestP();
-    }
-
-    /**
-     * Get distance to a given Player
-     * Inspired by Gevater_Tod4177 on greenfoot.org
-     * <a href="https://www.greenfoot.org/topics/4911">...</a>
-     *
-     * @param p Player
-     */
-    public double getDistance(Player p) {
-        return Math.hypot(p.getX() - getX(), p.getY() - getY());
-    }
-
-    /**
-     * Get the Player
-     * Inspired by Gevater_Tod4177 on greenfoot.org
-     * <a href="https://www.greenfoot.org/topics/4911">...</a>
-     */
-    public Player getPlayer() {
-        ArrayList<Player> pNear = (ArrayList<Player>) getObjectsInRange(area, Player.class);
-        Player nearestP = null;
-        if (!pNear.isEmpty()) {
-            nearestP = pNear.get(0);
+        idle();
+        if (getPlayer(range) != null && getDistance(getPlayer(range)) < range) {
+            sprint();
         }
-        return nearestP;
+    }
+
+    private void idle() {
+        int direction = 1;
+        if (getObjectsAtOffset(direction * getImage().getWidth() / 2, 0, Brick.class) != null) {
+            move(speed);
+        } else {
+            direction = -1;
+        }
     }
 
     /**
      * Move towards the nearest Player using getPlayer()
      */
-    public void followNearestP() {
-        Player p = getPlayer();
-        if (p != null) {
-            turnTowards(p);
-            move(speed);
+    private void sprint() {
+        Player p = getPlayer(range);
+        int direction;
+        if (p.getX() < getX()) {
+            direction = getX() - 1;
+        } else {
+            direction = getX() + 1;
         }
+        turnTowards(direction, getY());
+        move(speed * 2);
     }
-
 }

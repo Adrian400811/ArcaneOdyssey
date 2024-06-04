@@ -1,17 +1,15 @@
-import greenfoot.*;
-public class Bee extends SuperSmoothMover{
-    private int type;
-    private int speed;
+public abstract class Bee extends Mobs {
+    private final int hp;
+    private final int speed;
 
     public Bee() {
-
+        super();
+        hp = 2;
+        speed = 1;
     }
 
-    public int getType() {
-        return type;
-    }
+    public void act() {
+        super.act();
 
-    public int getSpeed() {
-        return speed;
     }
 }

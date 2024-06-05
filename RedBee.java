@@ -17,18 +17,20 @@ public class RedBee extends Bee {
     @Override
     public void act() {
         super.act();
-        idle();
         if (getPlayer(range) != null && getDistance(getPlayer(range)) < range) {
             sprint();
+        } else {
+            idle();
         }
     }
 
     private void idle() {
         int direction = 1;
-        if (getObjectsAtOffset(direction * getImage().getWidth() / 2, 0, Brick.class) != null) {
-            move(speed);
+        turnTowards(direction * 999, getY());
+        if (getOneObjectAtOffset(direction * getImage().getWidth(), 0, Brick.class) != null) {
+            direction *= -1;
         } else {
-            direction = -1;
+            move(speed);
         }
     }
 
@@ -37,13 +39,7 @@ public class RedBee extends Bee {
      */
     private void sprint() {
         Player p = getPlayer(range);
-        int direction;
-        if (p.getX() < getX()) {
-            direction = getX() - 1;
-        } else {
-            direction = getX() + 1;
-        }
-        turnTowards(direction, getY());
+        turnTowards(p);
         move(speed * 2);
     }
 }

@@ -5,8 +5,12 @@ import java.util.List;
 public abstract class Mobs extends SuperSmoothMover {
     public World w;
     private int hp;
-    private int speed;
-    private int range;
+    private final int speed;
+
+    public Mobs() {
+        hp = 1;
+        speed = 1;
+    }
 
     public void addedToWorld(World w) {
         this.w = w;

@@ -10,11 +10,13 @@ import greenfoot.World;
  */
 public class Player extends Actor {
     private static int speed;
+    private int hp;
     private World w;
     private int jumpActs = 0;
 
     public void addedToWorld(World w) {
         this.w = w;
+        hp = 10;
     }
 
     /**
@@ -76,10 +78,7 @@ public class Player extends Actor {
         return speed;
     }
 
-    public int[] getLocation() {
-        int[] location = new int[2];
-        location[0] = getX();
-        location[1] = getY();
-        return location;
+    public void changeHP(int deltaHP) {
+        hp += deltaHP;
     }
 }

@@ -38,12 +38,16 @@ public class MyWorld extends World {
         blockGeneration[5][7] = 1;
         spawnTerrain(blockGeneration);
         addObject(new RedBee(), 100, 600);
+        prepare();
     }
-
 
     public void act() {
         scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
         checkNext();
+    }
+
+    public void loadLevel() {
+
     }
 
     /**
@@ -69,5 +73,12 @@ public class MyWorld extends World {
             Level1 world = new Level1();
             Greenfoot.setWorld(world);
         }
+    }
+
+    /**
+     * Prepare the world for the start of the program.
+     * That is: create the initial objects and add them to the world.
+     */
+    private void prepare() {
     }
 }

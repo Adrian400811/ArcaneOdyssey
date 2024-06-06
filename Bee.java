@@ -9,7 +9,12 @@ public abstract class Bee extends Mobs {
     }
 
     public void act() {
-        super.act();
+        boundary();
+    }
 
+    private void boundary() {
+        if (w != null && (getX() < 0 || getX() > w.getWidth() || getY() < 0 || getY() > w.getHeight())) {
+            w.removeObject(this);
+        }
     }
 }

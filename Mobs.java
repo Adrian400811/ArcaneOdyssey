@@ -3,9 +3,9 @@ import greenfoot.World;
 import java.util.List;
 
 public abstract class Mobs extends SuperSmoothMover {
+    private final int speed;
     public World w;
     private int hp;
-    private final int speed;
 
     public Mobs() {
         hp = 1;
@@ -17,7 +17,17 @@ public abstract class Mobs extends SuperSmoothMover {
     }
 
     public void act() {
-        // Boundary
+        boundary();
+        collision();
+    }
+
+    private void gravity() {
+        if (!isTouching(Brick.class)) {
+            setLocation(getX(), getY() + 2);
+        }
+    }
+
+    private void boundary() {
         if (w != null) {
             if (getX() < 0) {
                 setLocation(0, getY());
@@ -32,7 +42,9 @@ public abstract class Mobs extends SuperSmoothMover {
                 setLocation(getX(), w.getHeight());
             }
         }
-        // Collision
+    }
+
+    public void collision() {
         if (getOneObjectAtOffset(getImage().getWidth() / 2, 0, Brick.class) != null) {
             setLocation(getX() - speed, getY());
         }

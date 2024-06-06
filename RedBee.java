@@ -2,12 +2,14 @@ public class RedBee extends Bee {
     private final int range;
     private int hp;
     private int speed;
+    private int direction;
 
     public RedBee() {
         super();
         hp = 2;
         speed = 1;
         range = 100;
+        direction = 1;
     }
 
     public RedBee(int range) {
@@ -25,7 +27,6 @@ public class RedBee extends Bee {
     }
 
     private void idle() {
-        int direction = 1;
         turnTowards(direction * 999, getY());
         if (getOneObjectAtOffset(direction * getImage().getWidth(), 0, Brick.class) != null) {
             direction *= -1;

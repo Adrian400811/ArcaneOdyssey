@@ -1,4 +1,6 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.Greenfoot;
+import greenfoot.GreenfootImage;
+import greenfoot.World;
 
 /**
  * Write a description of class MyWorld here.
@@ -9,7 +11,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MyWorld extends World {
     private final ImgScroll scroll;
     private final Player player;
-    private int[][] blockGeneration;
     private Orb orb;
 
     /**
@@ -21,28 +22,32 @@ public class MyWorld extends World {
         addObject(player = new Player(), 100, 622);
         scroll = new ImgScroll(this, new GreenfootImage("2dPixelForestBackground.png"), 2560, 720);
         // Flooring
-        for (int j=0; j<scroll.getScrollHeight()-100; j+=300){
-            for (int i=0; i<scroll.getScrollWidth(); i+=106){
-                addObject(new Brick(), 0+i, 700);
+        for (int j = 0; j < scroll.getScrollHeight() - 100; j += 300) {
+            for (int i = 0; i < scroll.getScrollWidth(); i += 106) {
+                addObject(new Brick(), i, 700);
             }
         }
         // Individual Block Placement
-        blockGeneration = new int[40][10];
+        int[][] blockGeneration = new int[40][10];
         blockGeneration[10][5] = 1;
         blockGeneration[11][5] = 1;
         blockGeneration[12][5] = 1;
         blockGeneration[28][5] = 1;
         blockGeneration[10][6] = 2;
         blockGeneration[10][9] = 1;
-        blockGeneration[10][9] = 1;
         blockGeneration[5][7] = 1;
         spawnTerrain(blockGeneration);
+        addObject(new RedBee(), 100, 600);
+        prepare();
     }
-
 
     public void act() {
         scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
         checkNext();
+    }
+
+    public void loadLevel() {
+
     }
 
     /**
@@ -68,5 +73,12 @@ public class MyWorld extends World {
             Level1 world = new Level1();
             Greenfoot.setWorld(world);
         }
+    }
+
+    /**
+     * Prepare the world for the start of the program.
+     * That is: create the initial objects and add them to the world.
+     */
+    private void prepare() {
     }
 }

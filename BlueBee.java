@@ -1,8 +1,7 @@
-import greenfoot.*;
-public class BlueBee extends Bee{
-    private final int speed = 1;
+public class BlueBee extends Bee {
+    private int speed;
 
-    public BlueBee(){
-
+    public BlueBee() {
+        super();
     }
 }

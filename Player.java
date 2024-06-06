@@ -32,7 +32,7 @@ public class Player extends Actor
             speed = -8;
         }
         // Jump
-        if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight()/2), Brick.class) != null){
+        if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight()/2)+1, Brick.class) != null){
             jumpActs = 30;
         }
         if (jumpActs>0){
@@ -41,7 +41,7 @@ public class Player extends Actor
             }
         }
         // Fall
-        if (getOneObjectAtOffset(0, (getImage().getHeight()/2), Brick.class) == null && jumpActs<15){
+        if (getOneObjectAtOffset(0, (getImage().getHeight()/2)+1, Brick.class) == null && jumpActs<15){
             setLocation(getX(), getY()+8);
         }
         // Boundary
@@ -68,6 +68,10 @@ public class Player extends Actor
         }
         if (getOneObjectAtOffset(0, -(getImage().getHeight()/2), Brick.class) != null){
             setLocation(getX(), getY()+6);
+            jumpActs = 0;
+        }
+        if (getOneObjectAtOffset(0, (getImage().getHeight()/2), Brick.class) != null){
+            setLocation(getX(), getY()-1);
             jumpActs = 0;
         }
     }

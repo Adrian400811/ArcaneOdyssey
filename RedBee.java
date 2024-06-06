@@ -1,57 +1,46 @@
-import java.util.ArrayList;
-
 public class RedBee extends Bee {
-    private final int speed = 2;
-    private int area;
+    private final int range;
+    private int hp;
+    private int speed;
+    private int direction;
 
     public RedBee() {
-        area = 1280;
+        super();
+        hp = 2;
+        speed = 1;
+        range = 100;
+        direction = 1;
     }
 
-    public RedBee(int area) {
-        this.area = area;
+    public RedBee(int range) {
+        this.range = range;
     }
 
     @Override
     public void act() {
         super.act();
-        followNearestP();
-    }
-
-    /**
-     * Get distance to a given Player
-     * Inspired by Gevater_Tod4177 on greenfoot.org
-     * <a href="https://www.greenfoot.org/topics/4911">...</a>
-     *
-     * @param p Player
-     */
-    public double getDistance(Player p) {
-        return Math.hypot(p.getX() - getX(), p.getY() - getY());
-    }
-
-    /**
-     * Get the Player
-     * Inspired by Gevater_Tod4177 on greenfoot.org
-     * <a href="https://www.greenfoot.org/topics/4911">...</a>
-     */
-    public Player getPlayer() {
-        ArrayList<Player> pNear = (ArrayList<Player>) getObjectsInRange(area, Player.class);
-        Player nearestP = null;
-        if (!pNear.isEmpty()) {
-            nearestP = pNear.get(0);
+        if (getPlayer(range) != null && getDistance(getPlayer(range)) < range) {
+            sprint();
+        } else {
+            idle();
         }
-        return nearestP;
+    }
+
+    private void idle() {
+        turnTowards(direction * 999, getY());
+        if (getOneObjectAtOffset(direction * getImage().getWidth(), 0, Brick.class) != null) {
+            direction *= -1;
+        } else {
+            move(speed);
+        }
     }
 
     /**
      * Move towards the nearest Player using getPlayer()
      */
-    public void followNearestP() {
-        Player p = getPlayer();
-        if (p != null) {
-            turnTowards(p);
-            move(speed);
-        }
+    private void sprint() {
+        Player p = getPlayer(range);
+        turnTowards(p);
+        move(speed * 2);
     }
-
 }

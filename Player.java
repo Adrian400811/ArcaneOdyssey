@@ -35,20 +35,17 @@ public class Player extends Actor {
             speed = -8;
         }
         // Jump
-        if (Greenfoot.isKeyDown("Space") && isTouching(Brick.class)) {
+        if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight()/2)+1, Brick.class) != null){
             jumpActs = 30;
         }
-        if (jumpActs > 15) {
-            setLocation(getX(), getY() - 10);
-            // End jump motion of head hits brick
-            if (getOneIntersectingObject(Brick.class) != null) {
-                setLocation(getX(), getY() + 10);
-                jumpActs = 15;
+        if (jumpActs>0){
+            if (jumpActs > 15){
+                setLocation(getX(), getY() - 8);
             }
         }
-        // Gravity
-        if (!isTouching(Brick.class)) {
-            setLocation(getX(), getY() + 2);
+        // Fall
+        if (getOneObjectAtOffset(0, (getImage().getHeight()/2)+1, Brick.class) == null && jumpActs<15){
+            setLocation(getX(), getY()+8);
         }
         // Boundary
         if (w != null) {
@@ -71,6 +68,14 @@ public class Player extends Actor {
         }
         if (getOneObjectAtOffset(-(getImage().getWidth() / 2), 0, Brick.class) != null) {
             setLocation(getX() - speed, getY());
+        }
+        if (getOneObjectAtOffset(0, -(getImage().getHeight()/2), Brick.class) != null){
+            setLocation(getX(), getY()+6);
+            jumpActs = 0;
+        }
+        if (getOneObjectAtOffset(0, (getImage().getHeight()/2), Brick.class) != null){
+            setLocation(getX(), getY()-1);
+            jumpActs = 0;
         }
     }
 

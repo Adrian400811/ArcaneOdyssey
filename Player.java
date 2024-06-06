@@ -32,23 +32,16 @@ public class Player extends Actor
             speed = -8;
         }
         // Jump
-        if (Greenfoot.isKeyDown("Space") && isTouching(Brick.class)){
+        if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight()/2), Brick.class) != null){
             jumpActs = 30;
         }
         if (jumpActs>0){
             if (jumpActs > 15){
                 setLocation(getX(), getY() - 8);
-                    //If Player hits head on Brick it will end the jump motion
-                    /**
-                    if (getOneIntersectingObject(Brick.class) != null){
-                        setLocation(getX(), getY() + 6);
-                        jumpActs = 15;
-                    }
-                    **/
             }
         }
         // Fall
-        if (!isTouching(Brick.class) && jumpActs<15){
+        if (getOneObjectAtOffset(0, (getImage().getHeight()/2), Brick.class) == null && jumpActs<15){
             setLocation(getX(), getY()+8);
         }
         // Boundary

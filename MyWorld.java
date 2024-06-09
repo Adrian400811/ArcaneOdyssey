@@ -1,6 +1,7 @@
 import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 import greenfoot.World;
+import greenfoot.*;
 
 /**
  * Write a description of class MyWorld here.
@@ -12,6 +13,8 @@ public class MyWorld extends World {
     private final ImgScroll scroll;
     private final Player player;
     private Orb orb;
+    private Font font = new Font("Arial", 18);
+    private SuperDisplayLabel coinLabel = new SuperDisplayLabel(Color.BLACK, Color.WHITE, font);
 
     /**
      * Constructor for objects of class MyWorld.
@@ -36,14 +39,39 @@ public class MyWorld extends World {
         blockGeneration[10][6] = 2;
         blockGeneration[10][9] = 1;
         blockGeneration[5][7] = 1;
+        blockGeneration[5][8] = 3;
         spawnTerrain(blockGeneration);
-        addObject(new RedBee(), 100, 600);
+        //addObject(new RedBee(), 100, 600);
+        addObject(coinLabel, 1100, 100);
+        coinLabel.update("Coins: ");
         prepare();
     }
 
     public void act() {
+        moveLabel();
         scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
         checkNext();
+    }
+    
+    public void moveLabel(){
+        if (Greenfoot.isKeyDown("D")) {
+            coinLabel.setLocation(coinLabel.getX() + 8, coinLabel.getY());
+        }
+        if (Greenfoot.isKeyDown("A")) {
+            coinLabel.setLocation(coinLabel.getX() - 8, coinLabel.getY());
+        }
+        if (coinLabel.getX() < 0) {
+                coinLabel.setLocation(0, coinLabel.getY());
+            }
+        if (coinLabel.getX() > getWidth()) {
+                coinLabel.setLocation(getWidth(), coinLabel.getY());
+            }
+        if (coinLabel.getY() < 0) {
+                coinLabel.setLocation(coinLabel.getX(), 0);
+            }
+        if (coinLabel.getY() > getHeight()) {
+                coinLabel.setLocation(coinLabel.getX(), getHeight());
+            }
     }
 
     public void loadLevel() {
@@ -64,6 +92,9 @@ public class MyWorld extends World {
                 if (identifier[i][j] == 2) {
                     addObject(orb = new Orb(), i * 64, j * 72);
                 }
+                if (identifier[i][j] == 3) {
+                    addObject(new Coin(), i * 64, j * 72);
+                }
             }
         }
     }
@@ -73,6 +104,10 @@ public class MyWorld extends World {
             Level1 world = new Level1();
             Greenfoot.setWorld(world);
         }
+    }
+    
+    public void setCoinCounter(){
+        
     }
 
     /**

@@ -3,23 +3,19 @@ import greenfoot.World;
 import java.util.List;
 
 public abstract class Mobs extends SuperSmoothMover {
-    private final int speed;
     public World w;
     private int hp;
+    private int speed;
+    private int dmg;
 
     public Mobs() {
-        hp = 1;
-        speed = 1;
+
     }
 
     public void addedToWorld(World w) {
         this.w = w;
     }
 
-    public void act() {
-        boundary();
-        collision();
-    }
 
     private void gravity() {
         if (!isTouching(Brick.class)) {
@@ -73,6 +69,9 @@ public abstract class Mobs extends SuperSmoothMover {
      * <a href="https://www.greenfoot.org/topics/4911">...</a>
      */
     public Player getPlayer(int range) {
+        if (getWorld() == null) {
+            return null;
+        }
         List<Player> pNear = getObjectsInRange(range, Player.class);
         if (!pNear.isEmpty()) {
             return pNear.get(0);
@@ -80,7 +79,35 @@ public abstract class Mobs extends SuperSmoothMover {
         return null;
     }
 
+    public void attack() {
+        Player p = (Player) getOneIntersectingObject(Player.class);
+        if (p == null) {
+            return;
+        }
+        p.changeHP(-dmg);
+    }
+
     public void changeHP(int deltaHP) {
         hp += deltaHP;
+    }
+
+    public void changeSpeed(int deltaSpeed) {
+        speed += deltaSpeed;
+    }
+
+    public int getHP() {
+        return hp;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public void setSpeed(double multiplier) {
+        speed = (int) (speed * multiplier);
     }
 }

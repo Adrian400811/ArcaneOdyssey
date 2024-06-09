@@ -11,6 +11,7 @@ import greenfoot.World;
 public class MyWorld extends World {
     private final ImgScroll scroll;
     private final Player player;
+    private final int[] worldSize = {2560, 720};
     private Orb orb;
 
     /**
@@ -20,14 +21,29 @@ public class MyWorld extends World {
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1, false);
         addObject(player = new Player(), 100, 622);
-        scroll = new ImgScroll(this, new GreenfootImage("2dPixelForestBackground.png"), 2560, 720);
+        scroll = new ImgScroll(this, new GreenfootImage("2dPixelForestBackground.png"), worldSize[0], worldSize[1]);
         // Flooring
         for (int j = 0; j < scroll.getScrollHeight() - 100; j += 300) {
             for (int i = 0; i < scroll.getScrollWidth(); i += 106) {
                 addObject(new Brick(), i, 700);
             }
         }
-        // Individual Block Placement
+        placeBlock();
+        addObject(new BlueBee(), 800, 600);
+        addObject(new RedBee(), 100, 600);
+        addObject(new Spider(), 1200, 600);
+    }
+
+    public void act() {
+        scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
+        checkNext();
+    }
+
+    public void loadLevel() {
+        // placeholder if we ever store map data in csv
+    }
+
+    private void placeBlock() {
         int[][] blockGeneration = new int[40][10];
         blockGeneration[10][5] = 1;
         blockGeneration[11][5] = 1;
@@ -37,17 +53,6 @@ public class MyWorld extends World {
         blockGeneration[10][9] = 1;
         blockGeneration[5][7] = 1;
         spawnTerrain(blockGeneration);
-        addObject(new RedBee(), 100, 600);
-        prepare();
-    }
-
-    public void act() {
-        scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
-        checkNext();
-    }
-
-    public void loadLevel() {
-
     }
 
     /**
@@ -75,10 +80,7 @@ public class MyWorld extends World {
         }
     }
 
-    /**
-     * Prepare the world for the start of the program.
-     * That is: create the initial objects and add them to the world.
-     */
-    private void prepare() {
+    public int[] getWorldSize() {
+        return worldSize;
     }
 }

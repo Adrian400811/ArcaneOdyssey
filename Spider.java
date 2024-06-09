@@ -4,10 +4,9 @@ public class Spider extends Mobs {
     private final int hp;
     private final double speed;
     private final int dmg;
-    public World w;
-    long startTime;
-    long elapsedTime;
-    boolean oob = false;
+    private World w;
+    private long startTime;
+    private boolean oob = false;
 
     public Spider() {
         hp = 2;
@@ -35,7 +34,7 @@ public class Spider extends Mobs {
             oob = false;
         }
         if (oob) {
-            elapsedTime = System.currentTimeMillis() - startTime;
+            long elapsedTime = System.currentTimeMillis() - startTime;
             if (elapsedTime > 10 * 1000) {
                 w.removeObject(this);
             }

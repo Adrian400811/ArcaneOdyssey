@@ -38,7 +38,7 @@ public class Level0 extends Level {
         int[][] mobGeneration = new int[40][10];
         addObject(new BlueBee(), 800, 600);
         addObject(new RedBee(), 100, 600);
-        addObject(new Spider(), 1200, 600);
+        addObject(new Spider(), 750, 600);
     }
 
     public void act() {

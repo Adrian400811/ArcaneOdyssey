@@ -1,35 +1,29 @@
+import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
+import greenfoot.World;
 
-/**
- * Write a description of class Level1 here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-public class Level1 extends Level {
-    private final ImgScroll scroll;
-    private final Player player;
+public class Level extends World {
+    protected final ImgScroll scroll;
     private final int[] worldSize = {2560, 720};
-    private final String background = "2dSpaceBackground.png";
+    private final String background = "2dPixelForestBackground.png";
+    protected Player player;
     private Orb orb;
 
-    /**
-     * Constructor for objects of class Level1.
-     */
-    public Level1() {
-        super();
-        spawnFloor();
-        addObject(player = new Player(), 100, 622);
+    public Level() {
+        super(1280, 720, 1, false);
         scroll = new ImgScroll(this, new GreenfootImage(background), worldSize[0], worldSize[1]);
-
-        // Individual Block Placement
-        int[][] blockGeneration = new int[40][10];
-        blockGeneration[2][5] = 1;
-        spawnTerrain(blockGeneration);
     }
 
     public void act() {
         scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
+    }
+
+    public void spawnFloor() {
+        for (int j = 0; j < scroll.getScrollHeight() - 100; j += 300) {
+            for (int i = 0; i < scroll.getScrollWidth(); i += 106) {
+                addObject(new Brick(), i, 700);
+            }
+        }
     }
 
     /**
@@ -48,5 +42,23 @@ public class Level1 extends Level {
                 }
             }
         }
+    }
+
+    public void checkNext() {
+        if (orb.isBeingTouched()) {
+            Level1 world = new Level1();
+            Greenfoot.setWorld(world);
+        }
+    }
+
+    public int[] getWorldSize() {
+        return worldSize;
+    }
+
+    public int[] getMapBoundary() {
+        int[] mapBoundary = new int[2];
+        mapBoundary[0] = scroll.getScrolledX();
+        mapBoundary[1] = scroll.getScrollWidth() + scroll.getScrolledX();
+        return mapBoundary;
     }
 }

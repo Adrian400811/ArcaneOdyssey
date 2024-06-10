@@ -15,6 +15,5 @@ public class BlueSpider extends Spider {
 
     public void act() {
         super.act();
-        super.movement();
     }
 }

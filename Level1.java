@@ -29,6 +29,8 @@ public class Level1 extends Level {
     }
 
     public void act() {
+        coinLabel.update("Coins: " + totalCoins);
+        coinLabel.setLocation(getWidth()/2, 20);
         scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
     }
 

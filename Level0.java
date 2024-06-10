@@ -1,4 +1,5 @@
 import greenfoot.GreenfootImage;
+import greenfoot.*;
 
 /**
  * Write a description of class Level0 here.
@@ -12,7 +13,7 @@ public class Level0 extends Level {
     private final int[] worldSize = {2560, 720};
     private final String background = "2dPixelForestBackground.png";
     private Orb orb;
-
+    
     /**
      * Constructor for objects of class Level0.
      */
@@ -30,7 +31,9 @@ public class Level0 extends Level {
         blockGeneration[10][6] = 2;
         blockGeneration[10][9] = 1;
         blockGeneration[5][7] = 1;
+        blockGeneration[5][8] = 3;
         spawnTerrain(blockGeneration);
+        
 
         int[][] mobGeneration = new int[40][10];
         addObject(new BlueBee(), 800, 600);
@@ -39,6 +42,8 @@ public class Level0 extends Level {
     }
 
     public void act() {
+        coinLabel.update("Coins: " + totalCoins);
+        coinLabel.setLocation(getWidth()/2, 20);
         scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
         checkNext();
     }

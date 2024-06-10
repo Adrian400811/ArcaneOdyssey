@@ -4,7 +4,7 @@ public abstract class Bee extends Mobs {
     private final int hp;
     private final int speed;
     private final int dmg;
-    private World w;
+    private Level w;
 
     public Bee() {
         super();
@@ -14,21 +14,12 @@ public abstract class Bee extends Mobs {
     }
 
     public void addedToWorld(World w) {
-        this.w = w;
+        this.w = (Level) w;
     }
 
     @Override
     public void act() {
+        attack();
         collision();
-        boundary();
-    }
-
-    private void boundary() {
-        if (w == null) {
-        }
-//        ImgScroll bounds = (ImgScroll) getOneIntersectingObject(ImgScroll.class);
-//        if (bounds == null) {
-//            w.removeObject(this);
-//        }
     }
 }

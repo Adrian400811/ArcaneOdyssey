@@ -47,7 +47,7 @@ public class TitleScreen extends World
     
     public void checkPressed(){
         if (Greenfoot.mouseClicked(startNew)){
-            MyWorld world = new MyWorld();
+            Level0 world = new Level0();
             Greenfoot.setWorld(world);
         }
         if (Greenfoot.mouseClicked(loadGame)){

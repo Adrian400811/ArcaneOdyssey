@@ -24,6 +24,14 @@ public class Coin extends Actor
     {
         if (isTouching(Player.class)){
             getWorld().removeObject(this);
+            Level.addToTotalCoin();
         }
+    }
+    
+    public boolean isBeingTouched(){
+        if (isTouching(Player.class)){
+            return true;
+        }
+        return false;
     }
 }

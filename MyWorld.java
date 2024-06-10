@@ -48,7 +48,8 @@ public class MyWorld extends World {
     }
 
     public void act() {
-        moveLabel();
+        //moveLabel();
+        coinLabel.setLocation(getWidth()/2, 20);
         scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
         checkNext();
     }

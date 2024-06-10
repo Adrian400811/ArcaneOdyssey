@@ -11,8 +11,7 @@ public class BlueBee extends Bee {
         super();
         direction = 1;
         speed = 1;
-        range = 5;
-        movement();
+        range = 300;
     }
 
     public void addedToWorld(World w) {
@@ -23,6 +22,7 @@ public class BlueBee extends Bee {
     public void act() {
         super.act();
         movement();
+        collision();
     }
 
     private void movement() {

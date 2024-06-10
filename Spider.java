@@ -7,6 +7,7 @@ public class Spider extends Mobs {
     private World w;
     private long startTime;
     private boolean oob = false;
+    private int direction = 1;
 
     public Spider() {
         hp = 2;
@@ -19,7 +20,21 @@ public class Spider extends Mobs {
     }
 
     public void act() {
+        movement();
+        attack();
         timeout();
+    }
+
+    protected void movement() {
+        if (getWorld() == null) {
+            return;
+        }
+        turnTowards(direction * 999, getY());
+        if (getOneObjectAtOffset(direction * getImage().getWidth(), 0, Brick.class) != null) {
+            direction *= -1;
+        } else {
+            move(speed);
+        }
     }
 
     public void timeout() {

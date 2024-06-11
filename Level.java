@@ -55,7 +55,7 @@ public class Level extends World {
         ArrayList<String> data = new ArrayList<String>();
         Scanner scan = null;
         try {
-            scan = new Scanner(new File("level" + level + ".csv"));
+            scan = new Scanner(new File("levels/" + level + ".csv"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

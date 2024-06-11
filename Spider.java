@@ -1,9 +1,11 @@
+import greenfoot.GreenfootImage;
 import greenfoot.World;
 
 public class Spider extends Mobs {
     private final int hp;
     private final double speed;
     private final int dmg;
+    private final GreenfootImage image;
     private World w;
     private int direction = 1;
     private long startTime;
@@ -15,6 +17,9 @@ public class Spider extends Mobs {
         hp = 2;
         speed = 1;
         dmg = 1;
+        image = new GreenfootImage("spider.png");
+        image.scale(47, 64);
+        setImage(image);
     }
 
     public void addedToWorld(World w) {

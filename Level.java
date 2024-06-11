@@ -86,6 +86,11 @@ public class Level extends World {
                     case 1 -> new Brick();
                     case 2 -> orb = new Orb();
                     case 3 -> new Coin();
+                    case 4 -> new Mites();
+                    case 5 -> new BlueBee();
+                    case 6 -> new RedBee();
+                    case 7 -> new GreenBee();
+                    case 8 -> new Spider();
                     default -> null;
                 };
                 if (a != null) {
@@ -95,3 +100,4 @@ public class Level extends World {
         }
     }
 }
+

@@ -28,7 +28,7 @@ public class Level0 extends Level {
         blockGeneration[11][5] = 1;
         blockGeneration[12][5] = 1;
         blockGeneration[28][5] = 1;
-        blockGeneration[10][6] = 2;
+        blockGeneration[20][6] = 2;
         blockGeneration[10][9] = 1;
         blockGeneration[5][7] = 1;
         blockGeneration[5][8] = 3;

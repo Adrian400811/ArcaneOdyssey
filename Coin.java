@@ -8,13 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Coin extends Collection
 {
-    private GreenfootImage image;
-    
-    public Coin(){
-        image = new GreenfootImage("marioCoin.png");
-        image.scale(45,55);
-        setImage(image);
-    }
+
     
     /**
      * Act - do whatever the Coin wants to do. This method is called whenever
@@ -29,10 +23,4 @@ public class Coin extends Collection
         }
     }
     
-    public boolean isBeingTouched(){
-        if (isTouching(Player.class)){
-            return true;
-        }
-        return false;
-    }
 }

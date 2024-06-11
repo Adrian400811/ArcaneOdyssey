@@ -30,6 +30,7 @@ public class Spider extends Mobs {
         }
         attack();
         timeout();
+        super.act();
     }
 
     protected void movement() {

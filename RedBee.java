@@ -25,6 +25,7 @@ public class RedBee extends Bee {
         } else {
             idle();
         }
+        
     }
 
 

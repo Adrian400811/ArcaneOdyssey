@@ -12,7 +12,7 @@ public class Level extends World {
     private Font font = new Font("Arial", 18);
     protected SuperDisplayLabel coinLabel = new SuperDisplayLabel(Color.BLACK, Color.WHITE, font);
     protected static int totalCoins = 0;
-
+    protected static int numOfCrown=0;
     public Level() {
         super(1280, 720, 1, false);
         scroll = new ImgScroll(this, new GreenfootImage(background), worldSize[0], worldSize[1]);
@@ -47,7 +47,10 @@ public class Level extends World {
                     addObject(orb = new Orb(), i * 64, j * 64);
                 }
                 if (identifier[i][j] == 3) {
-                    addObject(new Coin(), i * 64, j * 72);
+                    addObject(new Coin(), i * 64, j * 64);
+                }
+                if (identifier[i][j] == 4) {
+                    addObject(new Crown(), i * 64, j * 64);
                 }
             }
         }
@@ -70,7 +73,9 @@ public class Level extends World {
         mapBoundary[1] = scroll.getScrollWidth() + scroll.getScrolledX();
         return mapBoundary;
     }
-    
+    public static void addCrown(){
+        numOfCrown++;
+    }
     public static void addToTotalCoin(){
         totalCoins++;
     }

@@ -8,11 +8,11 @@ import greenfoot.GreenfootImage;
  * @version (a version number or a date)
  */
 public class Coin extends Actor {
-    private final GreenfootImage image;
+    private GreenfootImage image;
 
-    public Coin() {
+    public Coin(){
         image = new GreenfootImage("coin.png");
-        image.scale(45, 55);
+        image.scale(45,55);
         setImage(image);
     }
 

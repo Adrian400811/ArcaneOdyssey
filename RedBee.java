@@ -8,7 +8,7 @@ public class RedBee extends Bee {
     public RedBee() {
         super();
         hp = 2;
-        baseSpeed = 1;
+        baseSpeed = 2;
         range = 100;
     }
 

@@ -10,7 +10,7 @@ public class BlueBee extends Bee {
     public BlueBee() {
         super();
         direction = 1;
-        speed = 1;
+        speed = 2;
         range = 300;
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 public abstract class Mobs extends SuperSmoothMover {
     public World w;
     private int hp;
-    private int speed;
+    private int speed = 2;
     private int dmg;
     private int direction = 1;
 
@@ -51,11 +51,17 @@ public abstract class Mobs extends SuperSmoothMover {
         }
     }
 
+    protected void bounceWall() {
+        if (getOneObjectAtOffset(direction * getImage().getWidth() + 1, 0, Brick.class) != null) {
+            direction *= -1;
+        }
+    }
+
     protected void idle() {
         if (getWorld() == null) {
             return;
         }
-        turnTowards(direction * 99999, getY());
+        turnTowards(getX() + direction, getY());
         if (getOneObjectAtOffset(direction * getImage().getWidth() + 1, 0, Brick.class) != null) {
             direction *= -1;
         } else {

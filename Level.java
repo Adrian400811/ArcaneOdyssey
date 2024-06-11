@@ -28,17 +28,17 @@ public class Level extends World {
 
     /**
      * NOTE - Use a 2d array of [40][10] for this to work as intended
-     * Each value in the array represents 64x and 72y
+     * Each value in the array represents 64x and 64y
      */
     public void spawnTerrain(int[][] identifier) {
         for (int i = 0; i < identifier.length; i++) {
             for (int j = 0; j < identifier[i].length; j++) {
                 if (identifier[i][j] == 1) {
                     // i represents the X-values and j represents the y-values
-                    addObject(new Brick(), i * 64, j * 72);
+                    addObject(new Brick(), i * 64, j * 64);
                 }
                 if (identifier[i][j] == 2) {
-                    addObject(orb = new Orb(), i * 64, j * 72);
+                    addObject(orb = new Orb(), i * 64, j * 64);
                 }
             }
         }

@@ -2,13 +2,13 @@ public class RedBee extends Bee {
     private final int range;
     private final int direction = 1;
     private int hp;
-    private int baseSpeed;
+    private int curSpeed;
     private int speed;
 
     public RedBee() {
         super();
         hp = 2;
-        baseSpeed = 1;
+        speed = 2;
         range = 100;
     }
 
@@ -19,7 +19,7 @@ public class RedBee extends Bee {
     @Override
     public void act() {
         super.act();
-        speed = baseSpeed;
+        curSpeed = speed;
         if (getPlayer(range) != null) {
             sprint();
         } else {
@@ -35,7 +35,7 @@ public class RedBee extends Bee {
     private void sprint() {
         Player p = getPlayer(range);
         turnTowards(p);
-        speed = baseSpeed * 2;
-        move(speed);
+        curSpeed = speed * 2;
+        move(curSpeed);
     }
 }

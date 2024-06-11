@@ -9,7 +9,7 @@ public abstract class Bee extends Mobs {
     public Bee() {
         super();
         hp = 2;
-        speed = 1;
+        speed = 2;
         dmg = 1;
     }
 

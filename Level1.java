@@ -18,9 +18,11 @@ public class Level1 extends Level {
      */
     public Level1() {
         super();
-        spawnFloor();
-        addObject(player = new Player(), 100, 622);
         scroll = new ImgScroll(this, new GreenfootImage(background), worldSize[0], worldSize[1]);
+        spawnFloor(scroll);
+        addObject(player = new Player(), 100, 622);
+        addObject(coinLabel, 1100, 10);
+        coinLabel.update("Coins: " + totalCoins);
 
         // Individual Block Placement
         int[][] blockGeneration = new int[40][10];
@@ -30,25 +32,7 @@ public class Level1 extends Level {
 
     public void act() {
         coinLabel.update("Coins: " + totalCoins);
-        coinLabel.setLocation(getWidth()/2, 20);
+        coinLabel.setLocation(getWidth() / 2, 20);
         scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
-    }
-
-    /**
-     * NOTE - Use a 2d array of [40][10] for this to work as intended
-     * Each value in the array represents 64x and 72y
-     */
-    public void spawnTerrain(int[][] identifier) {
-        for (int i = 0; i < identifier.length; i++) {
-            for (int j = 0; j < identifier[i].length; j++) {
-                if (identifier[i][j] == 1) {
-                    // i represents the X-values and j represents the y-values
-                    addObject(new Brick(), i * 64, j * 72);
-                }
-                if (identifier[i][j] == 2) {
-                    addObject(orb = new Orb(), i * 64, j * 72);
-                }
-            }
-        }
     }
 }

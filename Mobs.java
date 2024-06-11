@@ -101,7 +101,7 @@ public abstract class Mobs extends SuperSmoothMover {
         return null;
     }
     public void stepped(){
-        if(getOneObjectAtOffset(getX(), getY()-1, Player.class)!=null){
+        if(getOneObjectAtOffset(getX(), -(getImage().getHeight()/2), Player.class)!=null){
             getWorld().removeObject(this);
         }
     }

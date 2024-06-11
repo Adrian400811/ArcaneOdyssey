@@ -7,13 +7,14 @@ import greenfoot.GreenfootImage;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Coin extends Actor {
+public class Coin extends Collection {
     private GreenfootImage image;
-
+    
     public Coin(){
         image = new GreenfootImage("coin.png");
-        image.scale(45,55);
+        image.scale(45,45);
         setImage(image);
+            
     }
 
     /**
@@ -25,9 +26,6 @@ public class Coin extends Actor {
             getWorld().removeObject(this);
             Level.addToTotalCoin();
         }
-    }
-
-    public boolean isBeingTouched() {
-        return isTouching(Player.class);
+        
     }
 }

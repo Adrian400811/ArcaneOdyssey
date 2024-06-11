@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 
 public class Level extends World {
     protected static int totalCoins = 0;
+    protected static int numOfCrown=0;
     private final int[] worldSize = {2560, 720};
     private final String background = "2dPixelForestBackground.png";
     private final Font font = new Font("Arial", 18);
@@ -24,10 +25,12 @@ public class Level extends World {
     public static void addToTotalCoin() {
         totalCoins++;
     }
-
+    public static void addCrown(){
+        numOfCrown++;
+    }
     public void spawnFloor(ImgScroll sc) {
         for (int j = 0; j < sc.getScrollHeight() - 100; j += 300) {
-            for (int i = 0; i < sc.getScrollWidth(); i += 63) {
+            for (int i = 0; i < sc.getScrollWidth()+64; i += 63) {
                 addObject(new Brick(), i, 700);
             }
         }

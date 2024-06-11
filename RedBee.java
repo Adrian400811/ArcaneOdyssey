@@ -18,14 +18,14 @@ public class RedBee extends Bee {
 
     @Override
     public void act() {
-        super.act();
+        
         curSpeed = speed;
         if (getPlayer(range) != null) {
             sprint();
         } else {
             idle();
         }
-        
+        super.act();
     }
 
 

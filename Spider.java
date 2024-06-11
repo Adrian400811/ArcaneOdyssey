@@ -69,7 +69,7 @@ public class Spider extends Mobs {
         }
         if (oob) {
             long elapsedTime = System.currentTimeMillis() - startTime;
-            if (elapsedTime > 10 * 1000) {
+            if (elapsedTime > 10 * 1000 && getWorld() != null) {
                 w.removeObject(this);
             }
         }

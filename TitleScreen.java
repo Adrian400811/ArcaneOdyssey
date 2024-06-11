@@ -54,7 +54,8 @@ public class TitleScreen extends World
             Greenfoot.setWorld(world);
         }
         if (Greenfoot.mouseClicked(loadGame)){
-            
+            LoadSettings world = new LoadSettings();
+            Greenfoot.setWorld(world);
         }
     }
 }

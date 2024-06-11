@@ -1,3 +1,4 @@
+import greenfoot.GreenfootImage;
 import greenfoot.World;
 
 public class Mites extends Mobs {
@@ -5,6 +6,7 @@ public class Mites extends Mobs {
     private final int dmg;
     private final int speed;
     private final int direction = 1;
+    private final GreenfootImage image;
     private Level w;
     private int movementAct;
     private int jumpAct;
@@ -13,6 +15,7 @@ public class Mites extends Mobs {
         hp = 2;
         dmg = 1;
         speed = 2;
+        image = new GreenfootImage("images/mites.png");
     }
 
     public void addedToWorld(World w) {
@@ -23,8 +26,13 @@ public class Mites extends Mobs {
         movementAct--;
         jumpAct--;
         movement();
+        bounceWall();
         collision();
         fall();
+    }
+
+    private void flipImage() {
+        image.mirrorHorizontally();
     }
 
     private void fall() {

@@ -1,23 +1,31 @@
-import greenfoot.Greenfoot;
-import greenfoot.GreenfootImage;
-import greenfoot.World;
 import greenfoot.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
 public class Level extends World {
+    protected static int totalCoins = 0;
     protected final ImgScroll scroll;
     private final int[] worldSize = {2560, 720};
     private final String background = "2dPixelForestBackground.png";
+    private final Font font = new Font("Arial", 18);
+    private final int lv = 0;
     protected Player player;
-    private Orb orb;
-    private Font font = new Font("Arial", 18);
     protected SuperDisplayLabel coinLabel = new SuperDisplayLabel(Color.BLACK, Color.WHITE, font);
-    protected static int totalCoins = 0;
+    private Orb orb;
 
     public Level() {
         super(1280, 720, 1, false);
         scroll = new ImgScroll(this, new GreenfootImage(background), worldSize[0], worldSize[1]);
         addObject(coinLabel, 1100, 10);
         coinLabel.update("Coins: " + totalCoins);
+    }
+
+    public static void addToTotalCoin() {
+        totalCoins++;
     }
 
     public void act() {
@@ -70,8 +78,22 @@ public class Level extends World {
         mapBoundary[1] = scroll.getScrollWidth() + scroll.getScrolledX();
         return mapBoundary;
     }
-    
-    public static void addToTotalCoin(){
-        totalCoins++;
+
+    public void loadLevel() throws FileNotFoundException {
+        Scanner scan = new Scanner(new File("level" + lv));
+        ArrayList<String> data = new ArrayList<String>();
+        while (scan.hasNextLine()) {
+            data.add(scan.nextLine());
+        }
+
+        int[][] blocks = new int[data.size()][data.size()];
+        for (String line : data) {
+            StringTokenizer st = new StringTokenizer(line, ",");
+            ArrayList<String> lineData = new ArrayList<String>();
+            while (st.hasMoreTokens()) {
+                lineData.add(st.nextToken());
+            }
+            blocks[Integer.parseInt(lineData.get(0))][Integer.parseInt(lineData.get(1))] = Integer.parseInt(lineData.get(2));
+        }
     }
 }

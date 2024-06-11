@@ -38,7 +38,7 @@ public class Level0 extends Level {
         addObject(new BlueBee(), 800, 600);
         addObject(new RedBee(), 100, 600);
         addObject(new Spider(), 750, 600);
-        addObject(new Mites(), 1000, 600);
+        addObject(new Mites(), 150, 600);
     }
 
     public void act() {
@@ -46,9 +46,5 @@ public class Level0 extends Level {
         coinLabel.setLocation(getWidth() / 2, 20);
         scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
         checkNext();
-    }
-
-    public void loadLevel() {
-        // placeholder if we ever store map data in csv
     }
 }

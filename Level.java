@@ -8,34 +8,27 @@ import java.util.StringTokenizer;
 
 public class Level extends World {
     protected static int totalCoins = 0;
-    protected final ImgScroll scroll;
     private final int[] worldSize = {2560, 720};
     private final String background = "2dPixelForestBackground.png";
     private final Font font = new Font("Arial", 18);
     private final int level = 0;
+    protected ImgScroll scroll;
     protected Player player;
     protected SuperDisplayLabel coinLabel = new SuperDisplayLabel(Color.BLACK, Color.WHITE, font);
     private Orb orb;
 
     public Level() {
         super(1280, 720, 1, false);
-        scroll = new ImgScroll(this, new GreenfootImage(background), worldSize[0], worldSize[1]);
-        addObject(coinLabel, 1100, 10);
-        coinLabel.update("Coins: " + totalCoins);
     }
 
     public static void addToTotalCoin() {
         totalCoins++;
     }
 
-    public void act() {
-        scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
-    }
-
-    public void spawnFloor() {
-        for (int j = 0; j < scroll.getScrollHeight() - 100; j += 300) {
-            for (int i = 0; i < scroll.getScrollWidth(); i += 106) {
-                addObject(new Brick(), i, 720);
+    public void spawnFloor(ImgScroll sc) {
+        for (int j = 0; j < sc.getScrollHeight() - 100; j += 300) {
+            for (int i = 0; i < sc.getScrollWidth(); i += 63) {
+                addObject(new Brick(), i, 700);
             }
         }
     }
@@ -89,15 +82,14 @@ public class Level extends World {
     public void spawnTerrain(int[][] identifier) {
         for (int i = 0; i < identifier.length; i++) {
             for (int j = 0; j < identifier[i].length; j++) {
-                if (identifier[i][j] == 1) {
-                    // i represents the X-values and j represents the y-values
-                    addObject(new Brick(), i * 64, j * 64);
-                }
-                if (identifier[i][j] == 2) {
-                    addObject(orb = new Orb(), i * 64, j * 64);
-                }
-                if (identifier[i][j] == 3) {
-                    addObject(new Coin(), i * 64, j * 64);
+                Actor a = switch (identifier[i][j]) {
+                    case 1 -> new Brick();
+                    case 2 -> orb = new Orb();
+                    case 3 -> new Coin();
+                    default -> null;
+                };
+                if (a != null) {
+                    addObject(a, i * 64, j * 64);
                 }
             }
         }

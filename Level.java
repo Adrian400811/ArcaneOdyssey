@@ -30,7 +30,7 @@ public class Level extends World {
     }
     public void spawnFloor(ImgScroll sc) {
         for (int j = 0; j < sc.getScrollHeight() - 100; j += 300) {
-            for (int i = 0; i < sc.getScrollWidth()+64; i += 63) {
+            for (int i = 0; i < sc.getScrollWidth() + 64; i += 63) {
                 addObject(new Brick(), i, 700);
             }
         }

@@ -1,6 +1,7 @@
 import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 import greenfoot.World;
+import greenfoot.*;
 
 public class Level extends World {
     protected final ImgScroll scroll;
@@ -8,10 +9,15 @@ public class Level extends World {
     private final String background = "2dPixelForestBackground.png";
     protected Player player;
     private Orb orb;
+    private Font font = new Font("Arial", 18);
+    protected SuperDisplayLabel coinLabel = new SuperDisplayLabel(Color.BLACK, Color.WHITE, font);
+    protected static int totalCoins = 0;
 
     public Level() {
         super(1280, 720, 1, false);
         scroll = new ImgScroll(this, new GreenfootImage(background), worldSize[0], worldSize[1]);
+        addObject(coinLabel, 1100, 10);
+        coinLabel.update("Coins: " + totalCoins);
     }
 
     public void act() {
@@ -40,6 +46,9 @@ public class Level extends World {
                 if (identifier[i][j] == 2) {
                     addObject(orb = new Orb(), i * 64, j * 64);
                 }
+                if (identifier[i][j] == 3) {
+                    addObject(new Coin(), i * 64, j * 72);
+                }
             }
         }
     }
@@ -60,5 +69,9 @@ public class Level extends World {
         mapBoundary[0] = scroll.getScrolledX();
         mapBoundary[1] = scroll.getScrollWidth() + scroll.getScrolledX();
         return mapBoundary;
+    }
+    
+    public static void addToTotalCoin(){
+        totalCoins++;
     }
 }

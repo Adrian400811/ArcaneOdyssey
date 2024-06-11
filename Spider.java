@@ -5,13 +5,15 @@ public class Spider extends Mobs {
     private final double speed;
     private final int dmg;
     private World w;
+    private int direction = 1;
     private long startTime;
     private boolean oob = false;
-    private int direction = 1;
+    private int holdAct = 0;
+    private boolean holding = false;
 
     public Spider() {
         hp = 2;
-        speed = 0.5;
+        speed = 1;
         dmg = 1;
     }
 
@@ -20,21 +22,37 @@ public class Spider extends Mobs {
     }
 
     public void act() {
-        movement();
+        if (checkBlock()) {
+            holdAct--;
+            hold();
+        } else {
+            movement();
+        }
         attack();
         timeout();
     }
 
     protected void movement() {
-        if (getWorld() == null) {
+        if (getWorld() == null || holding) {
             return;
         }
-        turnTowards(direction * 999, getY());
-        if (getOneObjectAtOffset(direction * getImage().getWidth(), 0, Brick.class) != null) {
-            direction *= -1;
-        } else {
-            move(speed);
+        setLocation(getX(), getY() + (speed * direction));
+    }
+
+    protected void hold() {
+        if (!holding) {
+            holding = true;
+            holdAct = 60;
         }
+        if (holdAct == 0) {
+            holding = false;
+            direction *= -1;
+            setLocation(getX(), getY() + (5 * direction));
+        }
+    }
+
+    private boolean checkBlock() {
+        return getOneIntersectingObject(Tile.class) != null;
     }
 
     public void timeout() {

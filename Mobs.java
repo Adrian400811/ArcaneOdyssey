@@ -17,7 +17,9 @@ public abstract class Mobs extends SuperSmoothMover {
     public void addedToWorld(World w) {
         this.w = w;
     }
-
+    public void act(){
+        stepped();
+    }
 
     private void gravity() {
         if (!isTouching(Brick.class)) {
@@ -108,7 +110,11 @@ public abstract class Mobs extends SuperSmoothMover {
         }
         return null;
     }
-
+    public void stepped(){
+        if(getOneObjectAtOffset(getX(), -(getImage().getHeight()/2), Player.class)!=null){
+            getWorld().removeObject(this);
+        }
+    }
     public void attack() {
         Player p = (Player) getOneIntersectingObject(Player.class);
         if (p == null) {

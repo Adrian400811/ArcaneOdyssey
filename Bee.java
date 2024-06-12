@@ -19,7 +19,9 @@ public abstract class Bee extends Mobs {
 
     @Override
     public void act() {
+        
         attack();
         collision();
+        super.act();
     }
 }

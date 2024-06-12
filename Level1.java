@@ -22,7 +22,6 @@ public class Level1 extends Level {
         spawnFloor(scroll);
         addObject(player = new Player(), 100, 622);
         addObject(coinLabel, 1100, 10);
-        coinLabel.update("Coins: " + totalCoins);
 
         // Individual Block Placement
         int[][] blockGeneration = new int[120][20];
@@ -31,8 +30,7 @@ public class Level1 extends Level {
     }
 
     public void act() {
-        coinLabel.update("Coins: " + totalCoins);
-        coinLabel.setLocation(getWidth() / 2, 20);
-        scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
+        followPlayer(scroll, player);
+        updateCoin(coinLabel);
     }
 }

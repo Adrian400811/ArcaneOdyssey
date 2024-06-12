@@ -115,7 +115,7 @@ public abstract class Mobs extends SuperSmoothMover {
             getWorld().removeObject(this);
         }
     }
-    public void attack() {
+    public void attack(int dmg) {
         Player p = (Player) getOneIntersectingObject(Player.class);
         if (p == null) {
             return;

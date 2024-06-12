@@ -109,12 +109,12 @@ public abstract class Mobs extends SuperSmoothMover {
         return null;
     }
 
-    public void attack() {
+    public void attack(int damage) {
         Player p = (Player) getOneIntersectingObject(Player.class);
         if (p == null) {
             return;
         }
-        p.changeHP(-dmg);
+        p.changeHP(-damage);
     }
 
     public void changeHP(int deltaHP) {

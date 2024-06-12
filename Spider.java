@@ -33,7 +33,7 @@ public class Spider extends Mobs {
         } else {
             movement();
         }
-        attack();
+        attack(dmg);
         timeout();
     }
 

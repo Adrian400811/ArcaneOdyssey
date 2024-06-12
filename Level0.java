@@ -23,7 +23,7 @@ public class Level0 extends Level {
         addObject(player = new Player(), 100, 622);
         addObject(coinLabel, 1100, 10);
         coinLabel.update("Coins: " + totalCoins);
-        
+
         int[][] blockGeneration = loadLevel(0);
         spawnTerrain(blockGeneration);
     }

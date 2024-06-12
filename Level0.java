@@ -20,9 +20,11 @@ public class Level0 extends Level {
         String background = "2dPixelForestBackground.png";
         scroll = new ImgScroll(this, new GreenfootImage(background), worldSize[0], worldSize[1]);
         spawnFloor(scroll);
-        addObject(player = new Player(), 100, 622);
+        addObject(player = new Player(), 100, 622); 
         addObject(coinLabel, 1100, 10);
-        coinLabel.update("Coins: " + totalCoins);
+        
+        addObject(saveButton, getWidth() - 100, 40);
+        coinLabel.update("Coins: " + totalCoins + "     HP: " + totalHP);
 
         int[][] blockGeneration = loadLevel(0);
         spawnTerrain(blockGeneration);
@@ -30,8 +32,9 @@ public class Level0 extends Level {
 
     public void act() {
         scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
-        coinLabel.update("Coins: " + totalCoins);
+        coinLabel.update("Coins: " + totalCoins + "     HP: " + totalHP);
         coinLabel.setLocation(getWidth() / 2, 20);
+        saveButton.setLocation(getWidth()-100, 40);
         checkNext();
     }
 }

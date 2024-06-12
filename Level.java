@@ -5,21 +5,30 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 public class Level extends World {
     protected static int totalCoins = 0;
+    protected static int totalHP = 5;
     protected static int numOfCrown=0;
     private final int[] worldSize = {2560, 720};
     private final String background = "2dPixelForestBackground.png";
     private final Font font = new Font("Arial", 18);
-    private final int level = 0;
+    private int level = 0;
     protected ImgScroll scroll;
     protected Player player;
     protected SuperDisplayLabel coinLabel = new SuperDisplayLabel(Color.BLACK, Color.WHITE, font);
     private Orb orb;
+    protected Button saveButton = new Button();
+    private GreenfootImage saveButtonImage = new GreenfootImage ("saveButtonImage.png");
+    
 
     public Level() {
         super(1280, 720, 1, false);
+        saveButtonImage.scale(150, 60);
+        saveButton.setImage(saveButtonImage);
     }
 
     public static void addToTotalCoin() {
@@ -38,6 +47,7 @@ public class Level extends World {
 
     public void checkNext() {
         if (orb.isBeingTouched()) {
+            level++;
             Level1 world = new Level1();
             Greenfoot.setWorld(world);
         }
@@ -102,5 +112,19 @@ public class Level extends World {
             }
         }
     }
+    
+    public void checkToSave(){
+        try{
+            FileWriter out = new FileWriter("saveFile1.csv");
+            PrintWriter output = new PrintWriter(out);
+            output.println(totalHP);
+            output.println(totalCoins);
+            output.println(level);
+            output.close();
+        } catch (IOException e) {
+            
+        }
+    }
+    
 }
 

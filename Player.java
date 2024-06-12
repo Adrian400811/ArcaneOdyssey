@@ -59,8 +59,10 @@ public class Player extends Actor {
     }
 
     private void fall() {
-        if (getOneObjectAtOffset(0, (getImage().getHeight() / 2) + 1, Brick.class) == null && jumpActs < 15) {
-            setLocation(getX(), getY() + 8);
+        if (getOneObjectAtOffset(getImage().getWidth()/2 - 2, (getImage().getHeight() / 2) + 1, Brick.class) == null && jumpActs < 15) {
+            if (getOneObjectAtOffset(-(getImage().getWidth()/2 - 2), (getImage().getHeight() / 2) + 1, Brick.class) == null && jumpActs < 15) {
+                setLocation(getX(), getY() + 8);
+            }
         }
     }
 

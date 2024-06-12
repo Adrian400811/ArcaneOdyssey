@@ -1,29 +1,25 @@
 import greenfoot.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
 
 public class Level extends World {
     protected static int totalCoins = 0;
     protected static int totalHP = 5;
-    protected static int numOfCrown=0;
+    protected static int numOfCrown = 0;
     private final int[] worldSize = {2560, 720};
     private final String background = "2dPixelForestBackground.png";
     private final Font font = new Font("Arial", 18);
-    private int level = 0;
+    private final GreenfootImage saveButtonImage = new GreenfootImage("saveButtonImage.png");
     protected ImgScroll scroll;
     protected Player player;
     protected SuperDisplayLabel coinLabel = new SuperDisplayLabel(Color.BLACK, Color.WHITE, font);
-    private Orb orb;
     protected Button saveButton = new Button();
-    private GreenfootImage saveButtonImage = new GreenfootImage ("saveButtonImage.png");
-    
+    private int level = 0;
+    private Orb orb;
+
 
     public Level() {
         super(1280, 720, 1, false);
@@ -31,7 +27,7 @@ public class Level extends World {
         saveButton.setImage(saveButtonImage);
         setPaintOrder(Button.class,SuperDisplayLabel.class,Tile.class);
     }
-    
+
     public static void resetCoin() {
         totalCoins = 0;
     }
@@ -39,9 +35,11 @@ public class Level extends World {
     public static void addToTotalCoin() {
         totalCoins++;
     }
-    public static void addCrown(){
+
+    public static void addCrown() {
         numOfCrown++;
     }
+
     public void spawnFloor(ImgScroll sc) {
         for (int j = 0; j < sc.getScrollHeight() - 100; j += 300) {
             for (int i = 0; i < sc.getScrollWidth() + 64; i += 63) {
@@ -74,7 +72,7 @@ public class Level extends World {
         mapBoundary[1] = scroll.getScrollWidth() + scroll.getScrolledX();
         return mapBoundary;
     }
-    
+
     public void followPlayer(ImgScroll scr, Player p) {
         if (p != null) {
             scr.scroll(getWidth() / 2 - p.getX(), getHeight() / 2 - p.getY());
@@ -126,7 +124,9 @@ public class Level extends World {
                     case 6 -> new RedBee();
                     case 7 -> new GreenBee();
                     case 8 -> new Spider();
-                    case 10 -> new Spike();
+                    case 9 -> new Crown();
+                    case 10 -> new JumpBooster();
+                    case 11 -> new Spike();
                     default -> null;
                 };
                 if (a != null) {
@@ -135,33 +135,33 @@ public class Level extends World {
             }
         }
     }
-    
-    public void checkToSave(){
-        try{
+
+    public void checkToSave() {
+        try {
             FileWriter out = new FileWriter("saveFile1.csv");
             PrintWriter output = new PrintWriter(out);
             output.println(totalHP + "," + totalCoins + "," + level);
             output.close();
         } catch (IOException e) {
-            
+
         }
     }
-    
-    public void checkSaveButton(){
-        if (Greenfoot.mouseClicked(saveButton)){
+
+    public void checkSaveButton() {
+        if (Greenfoot.mouseClicked(saveButton)) {
             checkToSave();
         }
     }
-    
-    public void levelUp(){
+
+    public void levelUp() {
         level++;
     }
-    
-    public void setHP(int hp){
+
+    public void setHP(int hp) {
         totalHP = hp;
     }
-    
-    public void setCoins(int coins){
+
+    public void setCoins(int coins) {
         totalCoins = coins;
     }
 }

@@ -1,15 +1,15 @@
 public class RedBee extends Bee {
     private final int range;
+    private final int direction = 1;
     private int hp;
+    private int curSpeed;
     private int speed;
-    private int direction;
 
     public RedBee() {
         super();
         hp = 2;
-        speed = 1;
+        speed = 2;
         range = 100;
-        direction = 1;
     }
 
     public RedBee(int range) {
@@ -18,22 +18,16 @@ public class RedBee extends Bee {
 
     @Override
     public void act() {
-        super.act();
-        if (getPlayer(range) != null && getDistance(getPlayer(range)) < range) {
+        
+        curSpeed = speed;
+        if (getPlayer(range) != null) {
             sprint();
         } else {
             idle();
         }
+        super.act();
     }
 
-    private void idle() {
-        turnTowards(direction * 999, getY());
-        if (getOneObjectAtOffset(direction * getImage().getWidth(), 0, Brick.class) != null) {
-            direction *= -1;
-        } else {
-            move(speed);
-        }
-    }
 
     /**
      * Move towards the nearest Player using getPlayer()
@@ -41,6 +35,7 @@ public class RedBee extends Bee {
     private void sprint() {
         Player p = getPlayer(range);
         turnTowards(p);
-        move(speed * 2);
+        curSpeed = speed * 2;
+        move(curSpeed);
     }
 }

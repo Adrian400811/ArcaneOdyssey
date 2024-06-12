@@ -10,13 +10,18 @@ import greenfoot.World;
  */
 public class Player extends Actor {
     private static int speed;
+    private final int dmg;
     private int hp;
     private World w;
     private int jumpActs = 0;
 
+    public Player() {
+        hp = 5;
+        dmg = 1;
+    }
+
     public void addedToWorld(World w) {
         this.w = w;
-        hp = 10;
     }
 
     /**
@@ -25,7 +30,15 @@ public class Player extends Actor {
      */
     public void act() {
         jumpActs--;
-        // Movement
+        movement();
+        jump();
+        fall();
+        collision();
+        boundary();
+        checkHP();
+    }
+
+    private void movement() {
         if (Greenfoot.isKeyDown("D")) {
             setLocation(getX() + 8, getY());
             speed = 8;
@@ -34,49 +47,63 @@ public class Player extends Actor {
             setLocation(getX() - 8, getY());
             speed = -8;
         }
-        // Jump
-        if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight()/2)+1, Brick.class) != null){
+    }
+
+    private void jump() {
+        if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight() / 2) + 1, Brick.class) != null) {
             jumpActs = 30;
         }
-        if (jumpActs>0){
-            if (jumpActs > 15){
-                setLocation(getX(), getY() - 8);
-            }
+        if (jumpActs > 15) {
+            setLocation(getX(), getY() - 8);
         }
-        // Fall
-        if (getOneObjectAtOffset(0, (getImage().getHeight()/2)+1, Brick.class) == null && jumpActs<15){
-            setLocation(getX(), getY()+8);
+    }
+
+    private void fall() {
+        if (getOneObjectAtOffset(0, (getImage().getHeight() / 2) + 1, Brick.class) == null && jumpActs < 15) {
+            setLocation(getX(), getY() + 8);
         }
-        // Boundary
-        if (w != null) {
-            if (getX() < 0) {
-                setLocation(0, getY());
-            }
-            if (getX() > w.getWidth()) {
-                setLocation(w.getWidth(), getY());
-            }
-            if (getY() < 0) {
-                setLocation(getX(), 0);
-            }
-            if (getY() > w.getHeight()) {
-                setLocation(getX(), w.getHeight());
-            }
+    }
+
+    private void boundary() {
+        if (w == null) {
+            return;
         }
-        // Collision Detection
+        if (getX() < 0) {
+            setLocation(0, getY());
+        }
+        if (getX() > w.getWidth()) {
+            setLocation(w.getWidth(), getY());
+        }
+        if (getY() < 0) {
+            setLocation(getX(), 0);
+        }
+        if (getY() > w.getHeight()) {
+            setLocation(getX(), 0);
+        }
+    }
+
+    private void collision() {
         if (getOneObjectAtOffset(getImage().getWidth() / 2, 0, Brick.class) != null) {
             setLocation(getX() - speed, getY());
         }
         if (getOneObjectAtOffset(-(getImage().getWidth() / 2), 0, Brick.class) != null) {
             setLocation(getX() - speed, getY());
         }
-        if (getOneObjectAtOffset(0, -(getImage().getHeight()/2), Brick.class) != null){
-            setLocation(getX(), getY()+6);
+        if (getOneObjectAtOffset(0, -(getImage().getHeight() / 2), Brick.class) != null) {
+            setLocation(getX(), getY() + 6);
             jumpActs = 0;
         }
-        if (getOneObjectAtOffset(0, (getImage().getHeight()/2), Brick.class) != null){
-            setLocation(getX(), getY()-1);
+        if (getOneObjectAtOffset(0, (getImage().getHeight() / 2), Brick.class) != null) {
+            setLocation(getX(), getY() - 1);
             jumpActs = 0;
         }
+    }
+
+    private void checkHP() {
+        if (hp > 0) {
+            return;
+        }
+        w.removeObject(this);
     }
 
     public int getSpeed() {

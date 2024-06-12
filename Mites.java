@@ -31,6 +31,7 @@ public class Mites extends Mobs {
         direction = bounceWall(direction, image);
         collision();
         fall();
+        attack(dmg);
     }
 
     private void fall() {

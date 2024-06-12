@@ -9,7 +9,7 @@ import greenfoot.GreenfootImage;
 public class Level0 extends Level {
     private final ImgScroll scroll;
     private final Player player;
-    private final int[] worldSize = {2560, 720};
+    private final int[] worldSize = {7680, 720};
     private Orb orb;
 
     /**
@@ -22,16 +22,15 @@ public class Level0 extends Level {
         spawnFloor(scroll);
         addObject(player = new Player(), 100, 622);
         addObject(coinLabel, 1100, 10);
-        coinLabel.update("Coins: " + totalCoins);
+        resetCoin();
 
         int[][] blockGeneration = loadLevel(0);
         spawnTerrain(blockGeneration);
     }
 
     public void act() {
-        scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
-        coinLabel.update("Coins: " + totalCoins);
-        coinLabel.setLocation(getWidth() / 2, 20);
+        followPlayer(scroll, player);
+        updateCoin(coinLabel);
         checkNext();
     }
 }

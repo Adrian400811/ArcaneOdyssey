@@ -22,6 +22,10 @@ public class Level extends World {
         super(1280, 720, 1, false);
     }
 
+    public static void resetCoin() {
+        totalCoins = 0;
+    }
+
     public static void addToTotalCoin() {
         totalCoins++;
     }
@@ -52,6 +56,17 @@ public class Level extends World {
         mapBoundary[0] = scroll.getScrolledX();
         mapBoundary[1] = scroll.getScrollWidth() + scroll.getScrolledX();
         return mapBoundary;
+    }
+
+    public void followPlayer(ImgScroll scr, Player p) {
+        if (p != null) {
+            scr.scroll(getWidth() / 2 - p.getX(), getHeight() / 2 - p.getY());
+        }
+    }
+
+    public void updateCoin(SuperDisplayLabel cl) {
+        cl.update("Coins: " + totalCoins);
+        cl.setLocation(getWidth() / 2, 20);
     }
 
     public int[][] loadLevel(int level) {
@@ -94,6 +109,7 @@ public class Level extends World {
                     case 6 -> new RedBee();
                     case 7 -> new GreenBee();
                     case 8 -> new Spider();
+                    case 9 -> new Crown();
                     default -> null;
                 };
                 if (a != null) {

@@ -100,10 +100,9 @@ public class Player extends Actor {
     }
 
     private void checkHP() {
-        if (hp > 0) {
-            return;
+        if (hp < 0) {
+            Greenfoot.setWorld(new GameOverScreen());
         }
-        w.removeObject(this);
     }
 
     public int getSpeed() {

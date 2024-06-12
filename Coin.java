@@ -1,4 +1,3 @@
-import greenfoot.Actor;
 import greenfoot.GreenfootImage;
 
 /**
@@ -8,13 +7,13 @@ import greenfoot.GreenfootImage;
  * @version (a version number or a date)
  */
 public class Coin extends Collection {
-    private GreenfootImage image;
-    
-    public Coin(){
+    private final GreenfootImage image;
+
+    public Coin() {
         image = new GreenfootImage("coin.png");
         image.scale(45,45);
         setImage(image);
-            
+
     }
 
     /**
@@ -26,6 +25,5 @@ public class Coin extends Collection {
             getWorld().removeObject(this);
             Level.addToTotalCoin();
         }
-        
     }
 }

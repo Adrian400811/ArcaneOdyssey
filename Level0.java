@@ -24,13 +24,8 @@ public class Level0 extends Level {
         addObject(coinLabel, 1100, 10);
         coinLabel.update("Coins: " + totalCoins);
 
-
         int[][] blockGeneration = loadLevel(0);
         spawnTerrain(blockGeneration);
-        addObject(new BlueBee(), 800, 600);
-        addObject(new RedBee(), 100, 600);
-        addObject(new Spider(), 750, 600);
-        addObject(new Mites(), 150, 600);
     }
 
     public void act() {

@@ -25,7 +25,7 @@ public class Level1 extends Level {
         coinLabel.update("Coins: " + totalCoins);
 
         // Individual Block Placement
-        int[][] blockGeneration = new int[40][10];
+        int[][] blockGeneration = new int[120][20];
         blockGeneration[2][5] = 1;
         spawnTerrain(blockGeneration);
     }

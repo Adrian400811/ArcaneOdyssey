@@ -25,6 +25,7 @@ public class Level extends World {
         super(1280, 720, 1, false);
         saveButtonImage.scale(150, 60);
         saveButton.setImage(saveButtonImage);
+        setPaintOrder(Button.class,SuperDisplayLabel.class,Tile.class);
     }
 
     public static void resetCoin() {
@@ -49,9 +50,15 @@ public class Level extends World {
 
     public void checkNext() {
         if (orb.isBeingTouched()) {
-            levelUp();
-            Level1 world = new Level1();
-            Greenfoot.setWorld(world);
+            if (level == 0){
+                levelUp();
+                Level1 world = new Level1();
+                Greenfoot.setWorld(world);
+            }
+            if (level == 1){
+                EndScreen end = new EndScreen();
+                Greenfoot.setWorld(end);
+            }
         }
     }
 
@@ -119,6 +126,7 @@ public class Level extends World {
                     case 8 -> new Spider();
                     case 9 -> new Crown();
                     case 10 -> new JumpBooster();
+                    case 11 -> new Spike();
                     default -> null;
                 };
                 if (a != null) {

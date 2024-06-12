@@ -53,7 +53,7 @@ public abstract class Mobs extends SuperSmoothMover {
     }
 
     protected int bounceWall(int dir) {
-        if (getOneObjectAtOffset(dir * getImage().getWidth() + 2, 0, Tile.class) != null) {
+        if (getOneObjectAtOffset(dir * getImage().getWidth() + 1, 0, Tile.class) != null) {
             dir *= -1;
         }
         return dir;

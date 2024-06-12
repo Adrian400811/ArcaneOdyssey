@@ -34,6 +34,7 @@ public class Level0 extends Level {
         followPlayer(scroll, player);
         updateCoin(coinLabel);
         saveButton.setLocation(getWidth()-100, 40);
+        checkSaveButton();
         checkNext();
     }
 }

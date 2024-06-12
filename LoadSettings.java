@@ -1,4 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.util.StringTokenizer;
 
 /**
  * Write a description of class LoadSettings here.
@@ -15,9 +20,6 @@ public class LoadSettings extends World
     
     private Button load1 = new Button();
     private GreenfootImage loadImage1 = new GreenfootImage("saveFile1.png");
-    
-    private Button load2 = new Button();
-    private GreenfootImage loadImage2 = new GreenfootImage("saveFile2.png");
     
 
     /**
@@ -40,9 +42,6 @@ public class LoadSettings extends World
         load1.setImage(loadImage1);
         addObject(load1, 640, 300);
         
-        // Load Button 2
-        load2.setImage(loadImage2);
-        addObject(load2, 640, 450);
     }
     
     public void act(){
@@ -51,10 +50,50 @@ public class LoadSettings extends World
     
     private void checkPressed(){
         if (Greenfoot.mouseClicked(load1)){
+            int[] savedOptions = loadSave();
+            int savedHP = savedOptions[0];
+            int savedCoins = savedOptions[1];
+            int savedLevel = savedOptions[2];
+            
+            if (savedLevel == 0){
+                Level0 level = new Level0();
+                Greenfoot.setWorld(level);
+                level.setHP(savedHP);
+                level.setCoins(savedCoins);
+            }
+            if (savedLevel == 1){
+                Level1 level = new Level1();
+                Greenfoot.setWorld(level);
+                level.setHP(savedHP);
+                level.setCoins(savedCoins);
+            }
             
         }
-        if (Greenfoot.mouseClicked(load2)){
-            
+    }
+    
+    public int[] loadSave() {
+        ArrayList<String> data = new ArrayList<String>();
+        Scanner scan = null;
+        try {
+            scan = new Scanner(new File("saveFile1.csv"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
+        while (scan.hasNextLine()) {
+            data.add(scan.nextLine());
+        }
+
+        int[] options = new int[3];
+        for (String line : data) {
+            StringTokenizer st = new StringTokenizer(line, ",");
+            ArrayList<String> lineData = new ArrayList<String>();
+            while (st.hasMoreTokens()) {
+                lineData.add(st.nextToken());
+            }
+            options[0] = (Integer.parseInt(lineData.get(0))); // totalHP
+            options[1] = (Integer.parseInt(lineData.get(1))); // totalCoins
+            options[2] = (Integer.parseInt(lineData.get(2))); // level
+        }
+        return options;
     }
 }

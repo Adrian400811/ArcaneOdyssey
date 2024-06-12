@@ -11,7 +11,7 @@ public class Level1 extends Level {
     private final Player player;
     private final int[] worldSize = {2700, 720};
     private final String background = "2dSpaceBackground.png";
-    private Orb orb = new Orb();
+    private Orb orb;
 
     /**
      * Constructor for objects of class Level1.
@@ -28,7 +28,6 @@ public class Level1 extends Level {
         // Individual Block Placement
         int[][] blockGeneration = loadLevel(1);
         spawnTerrain(blockGeneration);
-        orb.setLocation(100,100);
     }
 
     public void act() {

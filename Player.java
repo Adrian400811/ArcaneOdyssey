@@ -50,7 +50,9 @@ public class Player extends Actor {
     }
 
     private void jump() {
-        if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight() / 2) + 1, Brick.class) != null) {
+        if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset((getImage().getHeight() / 2), (getImage().getHeight() / 2) + 1, Brick.class) != null) {
+            jumpActs = 30;
+        } else if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(-(getImage().getHeight() / 2), (getImage().getHeight() / 2) + 1, Brick.class) != null) {
             jumpActs = 30;
         }
         if (jumpActs > 15) {
@@ -102,7 +104,7 @@ public class Player extends Actor {
     }
 
     private void checkHP() {
-        if (hp < 0) {
+        if (hp <= 0) {
             Greenfoot.setWorld(new GameOverScreen());
         }
     }
@@ -113,5 +115,9 @@ public class Player extends Actor {
 
     public void changeHP(int deltaHP) {
         hp += deltaHP;
+    }
+    
+    public boolean touchingSpike(){
+        return (isTouching(Spike.class));
     }
 }

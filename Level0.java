@@ -25,6 +25,7 @@ public class Level0 extends Level {
         addObject(saveButton, getWidth() - 100, 40);
         updateCoin(coinLabel);
         resetCoin();
+        setHP(5);
 
         int[][] blockGeneration = loadLevel(0);
         spawnTerrain(blockGeneration);

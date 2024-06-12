@@ -1,25 +1,30 @@
 import greenfoot.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Level extends World {
     protected static int totalCoins = 0;
-    protected static int numOfCrown=0;
+    protected static int totalHP = 5;
+    protected static int numOfCrown = 0;
     private final int[] worldSize = {2560, 720};
     private final String background = "2dPixelForestBackground.png";
     private final Font font = new Font("Arial", 18);
-    private final int level = 0;
+    private final GreenfootImage saveButtonImage = new GreenfootImage("saveButtonImage.png");
     protected ImgScroll scroll;
     protected Player player;
     protected SuperDisplayLabel coinLabel = new SuperDisplayLabel(Color.BLACK, Color.WHITE, font);
+    protected Button saveButton = new Button();
+    private int level = 0;
     private Orb orb;
+
 
     public Level() {
         super(1280, 720, 1, false);
+        saveButtonImage.scale(150, 60);
+        saveButton.setImage(saveButtonImage);
     }
 
     public static void resetCoin() {
@@ -29,9 +34,11 @@ public class Level extends World {
     public static void addToTotalCoin() {
         totalCoins++;
     }
-    public static void addCrown(){
+
+    public static void addCrown() {
         numOfCrown++;
     }
+
     public void spawnFloor(ImgScroll sc) {
         for (int j = 0; j < sc.getScrollHeight() - 100; j += 300) {
             for (int i = 0; i < sc.getScrollWidth() + 64; i += 63) {
@@ -42,6 +49,7 @@ public class Level extends World {
 
     public void checkNext() {
         if (orb.isBeingTouched()) {
+            level++;
             Level1 world = new Level1();
             Greenfoot.setWorld(world);
         }
@@ -65,7 +73,7 @@ public class Level extends World {
     }
 
     public void updateCoin(SuperDisplayLabel cl) {
-        cl.update("Coins: " + totalCoins);
+        cl.update("Coins: " + totalCoins + "     HP: " + totalHP);
         cl.setLocation(getWidth() / 2, 20);
     }
 
@@ -118,5 +126,19 @@ public class Level extends World {
             }
         }
     }
+
+    public void checkToSave() {
+        try {
+            FileWriter out = new FileWriter("saveFile1.csv");
+            PrintWriter output = new PrintWriter(out);
+            output.println(totalHP);
+            output.println(totalCoins);
+            output.println(level);
+            output.close();
+        } catch (IOException e) {
+
+        }
+    }
+
 }
 

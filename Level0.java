@@ -22,6 +22,8 @@ public class Level0 extends Level {
         spawnFloor(scroll);
         addObject(player = new Player(), 100, 622);
         addObject(coinLabel, 1100, 10);
+        addObject(saveButton, getWidth() - 100, 40);
+        updateCoin(coinLabel);
         resetCoin();
 
         int[][] blockGeneration = loadLevel(0);
@@ -31,6 +33,7 @@ public class Level0 extends Level {
     public void act() {
         followPlayer(scroll, player);
         updateCoin(coinLabel);
+        saveButton.setLocation(getWidth()-100, 40);
         checkNext();
     }
 }

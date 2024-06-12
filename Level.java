@@ -133,8 +133,6 @@ public class Level extends World {
             FileWriter out = new FileWriter("saveFile1.csv");
             PrintWriter output = new PrintWriter(out);
             output.println(totalHP + "," + totalCoins + "," + level);
-            //output.println(totalCoins + ",");
-            //output.println(level);
             output.close();
         } catch (IOException e) {
 

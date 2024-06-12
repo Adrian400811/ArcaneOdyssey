@@ -20,17 +20,18 @@ public class Level1 extends Level {
         super();
         scroll = new ImgScroll(this, new GreenfootImage(background), worldSize[0], worldSize[1]);
         spawnFloor(scroll);
-        addObject(player = new Player(), 100, 622);
+        addObject(player = new Player(), 130, 140);
         addObject(coinLabel, 1100, 10);
+        addObject(saveButton, getWidth() - 100, 40);
 
         // Individual Block Placement
-        int[][] blockGeneration = new int[120][20];
-        blockGeneration[2][5] = 1;
+        int[][] blockGeneration = loadLevel(1);
         spawnTerrain(blockGeneration);
     }
 
     public void act() {
         followPlayer(scroll, player);
         updateCoin(coinLabel);
+        checkSaveButton();
     }
 }

@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 
 public class Level extends World {
     protected static int totalCoins = 0;
+    protected static int numOfCrown=0;
     private final int[] worldSize = {2560, 720};
     private final String background = "2dPixelForestBackground.png";
     private final Font font = new Font("Arial", 18);
@@ -24,7 +25,9 @@ public class Level extends World {
     public static void addToTotalCoin() {
         totalCoins++;
     }
-
+    public static void addCrown(){
+        numOfCrown++;
+    }
     public void spawnFloor(ImgScroll sc) {
         for (int j = 0; j < sc.getScrollHeight() - 100; j += 300) {
             for (int i = 0; i < sc.getScrollWidth() + 64; i += 63) {
@@ -55,7 +58,7 @@ public class Level extends World {
         ArrayList<String> data = new ArrayList<String>();
         Scanner scan = null;
         try {
-            scan = new Scanner(new File("level" + level + ".csv"));
+            scan = new Scanner(new File("levels/" + level + ".csv"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -86,6 +89,11 @@ public class Level extends World {
                     case 1 -> new Brick();
                     case 2 -> orb = new Orb();
                     case 3 -> new Coin();
+                    case 4 -> new Mites();
+                    case 5 -> new BlueBee();
+                    case 6 -> new RedBee();
+                    case 7 -> new GreenBee();
+                    case 8 -> new Spider();
                     default -> null;
                 };
                 if (a != null) {
@@ -95,3 +103,4 @@ public class Level extends World {
         }
     }
 }
+

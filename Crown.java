@@ -14,6 +14,9 @@ public class Crown extends Collection
      */
     public void act()
     {
-        // Add your action code here.
+        if (isTouching(Player.class)){
+            getWorld().removeObject(this);
+            Level.addCrown();
+        }
     }
 }

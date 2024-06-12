@@ -1,3 +1,4 @@
+import greenfoot.GreenfootImage;
 import greenfoot.World;
 
 import java.util.List;
@@ -16,7 +17,9 @@ public abstract class Mobs extends SuperSmoothMover {
     public void addedToWorld(World w) {
         this.w = w;
     }
-
+    public void act(){
+        stepped();
+    }
 
     private void gravity() {
         if (!isTouching(Brick.class)) {
@@ -51,10 +54,19 @@ public abstract class Mobs extends SuperSmoothMover {
         }
     }
 
-    protected void bounceWall() {
-        if (getOneObjectAtOffset(direction * getImage().getWidth() + 1, 0, Brick.class) != null) {
-            direction *= -1;
+    protected int bounceWall(int dir) {
+        if (getOneObjectAtOffset(dir * getImage().getWidth() + 1, 0, Tile.class) != null) {
+            dir *= -1;
         }
+        return dir;
+    }
+
+    protected int bounceWall(int dir, GreenfootImage image) {
+        if (getOneObjectAtOffset(dir * getImage().getWidth() + 2, 0, Tile.class) != null) {
+            dir *= -1;
+            image.mirrorHorizontally();
+        }
+        return dir;
     }
 
     protected void idle() {
@@ -98,7 +110,11 @@ public abstract class Mobs extends SuperSmoothMover {
         }
         return null;
     }
-
+    public void stepped(){
+        if(getOneObjectAtOffset(getX(), -(getImage().getHeight()/2), Player.class)!=null){
+            getWorld().removeObject(this);
+        }
+    }
     public void attack() {
         Player p = (Player) getOneIntersectingObject(Player.class);
         if (p == null) {

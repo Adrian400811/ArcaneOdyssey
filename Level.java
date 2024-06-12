@@ -47,7 +47,7 @@ public class Level extends World {
 
     public void checkNext() {
         if (orb.isBeingTouched()) {
-            level++;
+            levelUp();
             Level1 world = new Level1();
             Greenfoot.setWorld(world);
         }
@@ -126,5 +126,8 @@ public class Level extends World {
         }
     }
     
+    public void levelUp(){
+        level++;
+    }
 }
 

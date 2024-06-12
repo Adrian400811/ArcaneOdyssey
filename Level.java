@@ -132,17 +132,31 @@ public class Level extends World {
         try{
             FileWriter out = new FileWriter("saveFile1.csv");
             PrintWriter output = new PrintWriter(out);
-            output.println(totalHP);
-            output.println(totalCoins);
-            output.println(level);
+            output.println(totalHP + "," + totalCoins + "," + level);
+            //output.println(totalCoins + ",");
+            //output.println(level);
             output.close();
         } catch (IOException e) {
             
         }
     }
     
+    public void checkSaveButton(){
+        if (Greenfoot.mouseClicked(saveButton)){
+            checkToSave();
+        }
+    }
+    
     public void levelUp(){
         level++;
+    }
+    
+    public void setHP(int hp){
+        totalHP = hp;
+    }
+    
+    public void setCoins(int coins){
+        totalCoins = coins;
     }
 }
 

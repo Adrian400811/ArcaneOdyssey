@@ -410,6 +410,6 @@ target9.x=0
 target9.y=0
 version=3.1.0
 width=1453
-world.lastInstantiated=EndScreen
+world.lastInstantiated=TitleScreen
 xPosition=0
 yPosition=0

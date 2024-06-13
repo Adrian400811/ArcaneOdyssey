@@ -9,6 +9,7 @@ public class Level extends World {
     protected static int totalCoins = 0;
     protected static int totalHP = 5;
     protected static int numOfCrown = 0;
+    private static int level = 0;
     private final int[] worldSize = {2560, 720};
     private final String background = "2dPixelForestBackground.png";
     private final Font font = new Font("Arial", 18);
@@ -17,7 +18,6 @@ public class Level extends World {
     protected Player player;
     protected SuperDisplayLabel coinLabel = new SuperDisplayLabel(Color.BLACK, Color.WHITE, font);
     protected Button saveButton = new Button();
-    private int level = 0;
     private Orb orb;
 
 
@@ -25,7 +25,15 @@ public class Level extends World {
         super(1280, 720, 1, false);
         saveButtonImage.scale(150, 60);
         saveButton.setImage(saveButtonImage);
-        setPaintOrder(Button.class,SuperDisplayLabel.class,Tile.class);
+        setPaintOrder(Button.class, SuperDisplayLabel.class, Tile.class);
+    }
+
+    public Level(int level) {
+        super(1280, 720, 1, false);
+        saveButtonImage.scale(150, 60);
+        saveButton.setImage(saveButtonImage);
+        setPaintOrder(Button.class, SuperDisplayLabel.class, Tile.class);
+        setLevel(level);
     }
 
     public static void resetCoin() {
@@ -41,25 +49,28 @@ public class Level extends World {
     }
 
     public void spawnFloor(ImgScroll sc) {
-        for (int j = 0; j < sc.getScrollHeight() - 100; j += 300) {
-            for (int i = 0; i < sc.getScrollWidth() + 64; i += 63) {
-                addObject(new Brick(), i, 700);
-            }
+        for (int i = 0; i < sc.getScrollWidth() + 64; i += 64) {
+            addObject(new Brick(), i, 700);
         }
     }
 
     public void checkNext() {
         if (orb.isBeingTouched()) {
-            if (level == 0){
+            if (level == 0) {
                 levelUp();
                 Level1 world = new Level1();
                 Greenfoot.setWorld(world);
+                return;
             }
-            if (level == 1){
+            if (level == 1) {
                 EndScreen end = new EndScreen();
                 Greenfoot.setWorld(end);
             }
         }
+    }
+
+    public void setLevel(int level) {
+        Level.level = level;
     }
 
     public int[] getWorldSize() {
@@ -127,6 +138,7 @@ public class Level extends World {
                     case 9 -> new Crown();
                     case 10 -> new JumpBooster();
                     case 11 -> new Spike();
+                    case 12 -> new FloorHole();
                     default -> null;
                 };
                 if (a != null) {

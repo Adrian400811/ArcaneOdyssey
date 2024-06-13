@@ -112,11 +112,9 @@ public class Player extends Actor {
     }
 
     private void jump() {
-        if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset((getImage().getHeight() / 2), (getImage().getHeight() / 2) + 1, Brick.class) != null) {
+        if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight() / 2) + 1, Brick.class) != null) {
             jumpActs = 30;
-        } else if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(-(getImage().getHeight() / 2), (getImage().getHeight() / 2) + 1, Brick.class) != null) {
-            jumpActs = 30;
-        }
+        } 
         if (jumpActs > 15) {
             setLocation(getX(), getY() - 8);
         }

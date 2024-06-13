@@ -8,12 +8,13 @@ public class JumpBooster extends Actor {
 
     public JumpBooster() {
         image = new GreenfootImage(64, 64);
+        image.setColor(new Color(63, 81, 181, 128));
+        image.fillRect(0, 0, 64, 64);
+        setImage(image);
     }
 
     public void addedToWorld(World w) {
-        image.setColor(new Color(63, 81, 181, 50));
-        image.drawRect(getX(), getY() + 30, 32, 2);
-        setImage(image);
+
     }
 
     public void act() {

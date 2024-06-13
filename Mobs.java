@@ -11,11 +11,12 @@ import java.util.List;
  */
 
 public abstract class Mobs extends SuperSmoothMover {
-    public World w;
-    private int hp;
-    private int speed = 2;
-    private int dmg;
-    private int direction = 1;
+    protected World w;
+    protected int attackAct = 0;
+    protected int direction = 1;
+    protected int hp;
+    protected int speed = 2;
+    protected int dmg;
 
     /**
      * Constructor
@@ -24,12 +25,20 @@ public abstract class Mobs extends SuperSmoothMover {
         enableStaticRotation();
     }
 
+    protected void bounceWall(GreenfootImage image) {
+        if (getOneObjectAtOffset(direction * getImage().getWidth() + 2, 0, Tile.class) != null) {
+            direction *= -1;
+            image.mirrorHorizontally();
+        }
+    }
+
     public void addedToWorld(World w) {
         this.w = w;
     }
 
     public void act() {
         stepped();
+        attackAct++;
     }
 
     private void gravity() {
@@ -66,21 +75,6 @@ public abstract class Mobs extends SuperSmoothMover {
         if (getOneObjectAtOffset(-(getImage().getWidth() / 2), 0, Brick.class) != null) {
             setLocation(getX() + speed, getY());
         }
-    }
-
-    protected int bounceWall(int dir) {
-        if (getOneObjectAtOffset(dir * getImage().getWidth() + 1, 0, Tile.class) != null) {
-            dir *= -1;
-        }
-        return dir;
-    }
-
-    protected int bounceWall(int dir, GreenfootImage image) {
-        if (getOneObjectAtOffset(dir * getImage().getWidth() + 2, 0, Tile.class) != null) {
-            dir *= -1;
-            image.mirrorHorizontally();
-        }
-        return dir;
     }
 
     protected void idle() {
@@ -144,10 +138,10 @@ public abstract class Mobs extends SuperSmoothMover {
      */
     public void attack(int dmg) {
         Player p = (Player) getOneIntersectingObject(Player.class);
-        if (p == null) {
-            return;
+        if (p != null && attackAct > 60) {
+            attackAct = 0;
+            p.changeHP(-dmg);
         }
-        p.changeHP(-dmg);
     }
 
     public void changeHP(int deltaHP) {

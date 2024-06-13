@@ -137,6 +137,7 @@ public class Level extends World {
         }
     }
 
+
     /**
      * Updates the coin and hp and sets the location of it
      * 

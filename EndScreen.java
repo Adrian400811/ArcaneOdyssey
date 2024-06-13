@@ -16,6 +16,10 @@ public class EndScreen extends World
     private final GreenfootImage gameOverImage = new GreenfootImage("gameOverInstructions.png");
 
     private Crown crown = new Crown();
+    
+    private GreenfootImage playerImage = new GreenfootImage("GuyR0.png");
+    private Button player = new Button();
+    
     /**
      * Constructor for objects of class EndScreen.
      * 
@@ -24,6 +28,10 @@ public class EndScreen extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1);
+        
+        
+        // Paint Order
+        setPaintOrder(SuperDisplayLabel.class, Crown.class, Button.class);
 
         // Background
         setBackground("brick.jpg");
@@ -41,7 +49,12 @@ public class EndScreen extends World
         gameOverLabel.setLocation(getWidth() / 2, 600);
         
         // Add a Crown 
-        addObject(crown, getWidth()/2, getHeight()/2);
+        addObject(crown, getWidth()/2-5, getHeight()/2-78);
+        
+        // Add player
+        playerImage.scale(140,150);
+        player.setImage(playerImage);
+        addObject(player, getWidth()/2, getHeight()/2);
 
     }
     

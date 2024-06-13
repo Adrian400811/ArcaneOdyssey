@@ -40,10 +40,8 @@ public class Level extends World {
     }
 
     public void spawnFloor(ImgScroll sc) {
-        for (int j = 0; j < sc.getScrollHeight() - 100; j += 300) {
-            for (int i = 0; i < sc.getScrollWidth() + 64; i += 63) {
-                addObject(new Brick(), i, 700);
-            }
+        for (int i = 0; i < sc.getScrollWidth() + 64; i += 64) {
+            addObject(new Brick(), i, 700);
         }
     }
 
@@ -119,6 +117,7 @@ public class Level extends World {
                     case 8 -> new Spider();
                     case 9 -> new Crown();
                     case 10 -> new JumpBooster();
+                    case 11 -> new FloorHole();
                     default -> null;
                 };
                 if (a != null) {

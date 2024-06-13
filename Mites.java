@@ -6,7 +6,6 @@ public class Mites extends Mobs {
     private final int dmg;
     private final int speed;
     private final GreenfootImage image;
-    private int direction = 1;
     private Level w;
     private int movementAct;
     private int jumpAct;
@@ -27,8 +26,9 @@ public class Mites extends Mobs {
     public void act() {
         movementAct--;
         jumpAct--;
+        attackAct++;
         movement();
-        direction = bounceWall(direction, image);
+        bounceWall(image);
         collision();
         fall();
         attack(dmg);

@@ -90,9 +90,9 @@ public class Level extends World {
         }
     }
 
-    public void updateCoin(SuperDisplayLabel cl) {
-        cl.update("Coins: " + totalCoins + "     HP: " + totalHP);
-        cl.setLocation(getWidth() / 2, 20);
+    public void updateCoin() {
+        coinLabel.update("Coins: " + totalCoins + "     HP: " + totalHP);
+        coinLabel.setLocation(getWidth() / 2, 20);
     }
 
     public int[][] loadLevel(int level) {

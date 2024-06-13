@@ -23,7 +23,7 @@ public class Level1 extends Level {
         addObject(player = new Player(), 130, 135);
         addObject(coinLabel, 1100, 10);
         addObject(saveButton, getWidth() - 100, 40);
-        updateCoin(coinLabel);
+        updateCoin();
 
         // Individual Block Placement
         int[][] blockGeneration = loadLevel(1);
@@ -32,17 +32,17 @@ public class Level1 extends Level {
 
     public void act() {
         followPlayer(scroll, player);
-        updateCoin(coinLabel);
-        saveButton.setLocation(getWidth()-100, 40);
+        updateCoin();
+        saveButton.setLocation(getWidth() - 100, 40);
         checkSaveButton();
         loseLife();
         checkNext();
     }
-    
-    private void loseLife(){
-        if (player.touchingSpike()){
+
+    private void loseLife() {
+        if (player.touchingSpike()) {
             player.changeHP(-5);
-            setHP(totalHP-5);
+            setHP(totalHP - 5);
         }
     }
 }

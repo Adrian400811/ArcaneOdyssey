@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class FriendlyCreatures here.
+ * FriendlyCreatures Class
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Daniel
+ * @version June 13 2024
  */
 public class FriendlyCreatures extends SuperSmoothMover
 {

@@ -1,10 +1,10 @@
 import greenfoot.GreenfootImage;
 
 /**
- * Write a description of class Block here.
+ * Block Class
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adrian, Jimmy
+ * @version June 13 2024
  */
 public class Brick extends Tile {
     public Brick() {

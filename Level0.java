@@ -1,10 +1,10 @@
 import greenfoot.GreenfootImage;
 
 /**
- * Write a description of class Level0 here.
+ * World for Level0 of the game
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adrian
+ * @version June 13 2024
  */
 public class Level0 extends Level {
     private final ImgScroll scroll;

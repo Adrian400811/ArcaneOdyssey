@@ -4,6 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+/**
+ * Level Superclass
+ * 
+ * @author Adrian, Jimmy
+ * @version June 13, 2024
+ */
 
 public class Level extends World {
     protected static int totalCoins = 0;
@@ -20,14 +26,21 @@ public class Level extends World {
     protected Button saveButton = new Button();
     private Orb orb;
 
-
+    /**
+     * Constructor
+     */
     public Level() {
         super(1280, 720, 1, false);
         saveButtonImage.scale(150, 60);
         saveButton.setImage(saveButtonImage);
         setPaintOrder(Button.class, SuperDisplayLabel.class, Tile.class);
     }
-
+    
+    /**
+     * Constructor
+     * 
+     * @param int   The level to go to
+     */
     public Level(int level) {
         super(1280, 720, 1, false);
         saveButtonImage.scale(150, 60);
@@ -36,24 +49,40 @@ public class Level extends World {
         setLevel(level);
     }
 
+    /**
+     * Resets coins
+     */
     public static void resetCoin() {
         totalCoins = 0;
     }
 
+    /**
+     * Adds a singular coin to the total
+     */
     public static void addToTotalCoin() {
         totalCoins++;
     }
 
+    /**
+     * Adds one crown to the total
+     */
     public static void addCrown() {
         numOfCrown++;
     }
 
+    /**
+     * Spawns the floor of the world
+     */
     public void spawnFloor(ImgScroll sc) {
         for (int i = 0; i < sc.getScrollWidth() + 64; i += 64) {
             addObject(new Brick(), i, 700);
         }
     }
 
+    /**
+     * Check if touching Orb.
+     * If it is touching orb, go to the next level
+     */
     public void checkNext() {
         if (orb.isBeingTouched()) {
             if (level == 0) {
@@ -69,14 +98,29 @@ public class Level extends World {
         }
     }
 
+    /**
+     * Sets the current level to the desired level
+     * 
+     * @param int     The desired level to go to
+     */
     public void setLevel(int level) {
         Level.level = level;
     }
 
+    /**
+     * Returns the size of the world
+     * 
+     * @return int[]    the size of the world
+     */
     public int[] getWorldSize() {
         return worldSize;
     }
 
+    /**
+     * Returns the boundaries of the map
+     * 
+     * @return int[]    the boundary of the map
+     */
     public int[] getMapBoundary() {
         int[] mapBoundary = new int[2];
         mapBoundary[0] = scroll.getScrolledX();
@@ -84,17 +128,32 @@ public class Level extends World {
         return mapBoundary;
     }
 
+    /**
+     * Follows the Player around the map
+     */
     public void followPlayer(ImgScroll scr, Player p) {
         if (p != null) {
             scr.scroll(getWidth() / 2 - p.getX(), getHeight() / 2 - p.getY());
         }
     }
 
-    public void updateCoin() {
-        coinLabel.update("Coins: " + totalCoins + "     HP: " + totalHP);
-        coinLabel.setLocation(getWidth() / 2, 20);
+
+    /**
+     * Updates the coin and hp and sets the location of it
+     * 
+     * @param SuperDisplayLabel   the label to update
+     */
+    public void updateCoin(SuperDisplayLabel cl) {
+        cl.update("Coins: " + totalCoins + "     HP: " + totalHP);
+        cl.setLocation(getWidth() / 2, 20);
     }
 
+    /**
+     * Loads level from a csv file
+     * 
+     * @param level     The level to load
+     * @return int[][]  The 2d array with the location of the blocks
+     */
     public int[][] loadLevel(int level) {
         ArrayList<String> data = new ArrayList<String>();
         Scanner scan = null;
@@ -118,10 +177,16 @@ public class Level extends World {
         }
         return blocks;
     }
-
+    
+    
     /**
+     * Spawns the blocks
+     * 
+     * @param identifier    The 2d array of blocks to be loaded
+     * 
+     * 
      * NOTE - Use a 2d array of [40][10] for this to work as intended
-     * Each value in the array represents 64x and 72y
+     * Each value in the array represents 64x and 64y
      */
     public void spawnTerrain(int[][] identifier) {
         for (int i = 0; i < identifier.length; i++) {
@@ -148,6 +213,9 @@ public class Level extends World {
         }
     }
 
+    /**
+     * Saves the values to a csv file
+     */
     public void checkToSave() {
         try {
             FileWriter out = new FileWriter("saveFile1.csv");
@@ -159,20 +227,37 @@ public class Level extends World {
         }
     }
 
+    /**
+     * Checks if saveButton has been clicked
+     * If clicked, runs the checkToSave() method
+     */
     public void checkSaveButton() {
         if (Greenfoot.mouseClicked(saveButton)) {
             checkToSave();
         }
     }
 
+    /**
+     * Increases level by one
+     */
     public void levelUp() {
         level++;
     }
 
+    /**
+     * Sets current HP to desired HP
+     * 
+     * @param hp        The desired HP
+     */
     public void setHP(int hp) {
         totalHP = hp;
     }
-
+    
+    /**
+     * Sets coins to the desired coins
+     * 
+     * @param coins     The desired coins
+     */
     public void setCoins(int coins) {
         totalCoins = coins;
     }

@@ -1,10 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Title Screen 
+ * Title Screen for the game
+ * Players can create a new game 
+ * Or load their previous game if they have a save file
  * 
  * @author Jimmy
- * @version (a version number or a date)
+ * @version June 13 2024
  */
 public class TitleScreen extends World
 {

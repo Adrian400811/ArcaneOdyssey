@@ -3,6 +3,12 @@ import greenfoot.Color;
 import greenfoot.GreenfootImage;
 import greenfoot.World;
 
+/**
+ * JumpBooster Class
+ * 
+ * @author Adrian
+ * @version June 13 2024
+ */
 public class JumpBooster extends Actor {
     GreenfootImage image;
 

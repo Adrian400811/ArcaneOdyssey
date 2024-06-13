@@ -1,14 +1,17 @@
 import greenfoot.GreenfootImage;
 
 /**
- * Write a description of class Coin here.
+ * Coin class
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Jimmy, Daniel
+ * @version June 13 2024
  */
 public class Coin extends Collection {
     private final GreenfootImage image;
 
+    /**
+     * Constructor
+     */
     public Coin() {
         image = new GreenfootImage("coin.png");
         image.scale(45,45);
@@ -17,8 +20,7 @@ public class Coin extends Collection {
     }
 
     /**
-     * Act - do whatever the Coin wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Act - if touching Player, remove coin and add it to the total coins
      */
     public void act() {
         if (isTouching(Player.class)) {

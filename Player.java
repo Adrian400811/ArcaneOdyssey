@@ -3,10 +3,12 @@ import greenfoot.Greenfoot;
 import greenfoot.World;
 import greenfoot.*;
 /**
- * Write a description of class Player here.
+ * Player Class
+ * Main Physics by Jimmy and Adrian
+ * Animation by Anson
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Jimmy, Adrian, Anson
+ * @version June 13, 2024
  */
 public class Player extends Actor {
     private static int speed;
@@ -77,6 +79,11 @@ public class Player extends Actor {
         fixDirections(); 
     }
 
+    /**
+     * Movement for the Player
+     * 
+     * @return  void
+     */
     private void movement() {
         if (Greenfoot.isKeyDown("D")) {
             setLocation(getX() + 8, getY());
@@ -111,6 +118,11 @@ public class Player extends Actor {
         }
     }
 
+    /**
+     * Jump method for the Player
+     * 
+     * @return  void
+     */
     private void jump() {
         if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight() / 2) + 1, Brick.class) != null) {
             jumpActs = 30;
@@ -199,16 +211,33 @@ public class Player extends Actor {
         }
     }
 
+    /**
+     * Returns the speed for the Player
+     * 
+     * @return int  speed of the Player
+     */
     public int getSpeed() {
         return speed;
     }
-
+    
+    /**
+     * Change the HP for the Player
+     * 
+     * @param   int     amount of hp to be changed
+     * @return  void
+     */
     public void changeHP(int deltaHP) {
         hp += deltaHP;
         w.setHP(hp);
     }
 
-    public boolean touchingSpike() {
+    
+    /**
+     * Returns if the Player is touching a Spike
+     * 
+     * @return boolean     true if it is touching Spike, false if not touching Spike
+     */
+    public boolean touchingSpike(){
         return (isTouching(Spike.class));
     }
 }

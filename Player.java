@@ -32,13 +32,13 @@ public class Player extends Actor {
         D = new GreenfootImage[9];
         for(int i = 0; i < R.length; i++){
                 R[i] = new GreenfootImage("GuyR" + i + ".png");
-                R[i].scale(70,75);
+                R[i].scale(50,60);
                 L[i] = new GreenfootImage("GuyL" + i + ".png");
-                L[i].scale(70,75);
+                L[i].scale(50,60);
                 U[i] = new GreenfootImage("GuyR" + i + ".png"); 
-                U[i].scale(70,75);
+                U[i].scale(50,60);
                 D[i] = new GreenfootImage("GuyR" + i + ".png");
-                D[i].scale(70,75);
+                D[i].scale(50,60);
             }
         animDelay = 3;
         setImage(R[0]);

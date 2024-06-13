@@ -25,6 +25,7 @@ public class Level extends World {
     protected SuperDisplayLabel coinLabel = new SuperDisplayLabel(Color.BLACK, Color.WHITE, font);
     protected Button saveButton = new Button();
     private Orb orb;
+    private static GreenfootSound orbSound = new GreenfootSound("levelup.wav");
 
     /**
      * Constructor
@@ -34,6 +35,7 @@ public class Level extends World {
         saveButtonImage.scale(150, 60);
         saveButton.setImage(saveButtonImage);
         setPaintOrder(Button.class, SuperDisplayLabel.class, Tile.class);
+        Collection.init();
     }
     
     /**
@@ -85,6 +87,7 @@ public class Level extends World {
      */
     public void checkNext() {
         if (orb.isBeingTouched()) {
+            orbSound.play();
             if (level == 0) {
                 levelUp();
                 Level1 world = new Level1();

@@ -39,4 +39,12 @@ public class Level0 extends Level {
         checkSaveButton();
         checkNext();
     }
+    
+    public void stopped() {
+        TitleScreen.stopBGM();
+    }
+
+    public void started() {
+        TitleScreen.playBGM();
+    }
 }

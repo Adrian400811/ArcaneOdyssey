@@ -45,4 +45,12 @@ public class Level1 extends Level {
             setHP(totalHP - 5);
         }
     }
+    
+    public void stopped() {
+        TitleScreen.stopBGM();
+    }
+
+    public void started() {
+        TitleScreen.playBGM();
+    }
 }

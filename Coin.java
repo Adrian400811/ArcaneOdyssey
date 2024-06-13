@@ -24,6 +24,7 @@ public class Coin extends Collection {
      */
     public void act() {
         if (isTouching(Player.class)) {
+            playCollected();
             getWorld().removeObject(this);
             Level.addToTotalCoin();
         }

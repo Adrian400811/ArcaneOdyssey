@@ -3,6 +3,13 @@ import greenfoot.World;
 
 import java.util.List;
 
+/**
+ * Mobs Class
+ * 
+ * @author Adrian
+ * @version June 13 2024
+ */
+
 public abstract class Mobs extends SuperSmoothMover {
     public World w;
     private int hp;
@@ -10,6 +17,9 @@ public abstract class Mobs extends SuperSmoothMover {
     private int dmg;
     private int direction = 1;
 
+    /**
+     * Constructor
+     */
     public Mobs() {
         enableStaticRotation();
     }
@@ -46,6 +56,9 @@ public abstract class Mobs extends SuperSmoothMover {
         }
     }
 
+    /**
+     * Checks for collision with the Brick class
+     */
     public void collision() {
         if (getOneObjectAtOffset(getImage().getWidth() / 2, 0, Brick.class) != null) {
             setLocation(getX() - speed, getY());
@@ -112,6 +125,9 @@ public abstract class Mobs extends SuperSmoothMover {
         return null;
     }
 
+    /**
+     * If stepped on by Player class, remove this mob
+     */
     public void stepped() {
         if (getWorld() == null) {
             return;
@@ -120,7 +136,12 @@ public abstract class Mobs extends SuperSmoothMover {
             getWorld().removeObject(this);
         }
     }
-
+    
+    /**
+     * Checks if Mob attacks Player and changes HP by dmg if Player gets hit
+     * 
+     * @param dmg       The amount to change Player HP by
+     */
     public void attack(int dmg) {
         Player p = (Player) getOneIntersectingObject(Player.class);
         if (p == null) {

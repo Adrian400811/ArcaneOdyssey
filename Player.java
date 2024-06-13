@@ -173,7 +173,6 @@ public class Player extends Actor {
     private void animate(){
         if(walking){
             if(animCounter == 0){
-                System.out.println("Changing frame.");
                 animCounter = animDelay;
                 animIndex++;
                 if(animIndex == R.length){

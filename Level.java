@@ -147,6 +147,11 @@ public class Level extends World {
         cl.update("Coins: " + totalCoins + "     HP: " + totalHP);
         cl.setLocation(getWidth() / 2, 20);
     }
+    
+    public void updateCoin() {
+        coinLabel.update("Coins: " + totalCoins + "     HP: " + totalHP);
+        coinLabel.setLocation(getWidth() / 2, 20);
+    }
 
     /**
      * Loads level from a csv file

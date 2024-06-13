@@ -26,6 +26,7 @@ public class Level0 extends Level {
         updateCoin(coinLabel);
         resetCoin();
         setHP(5);
+        setLevel(0);
 
         int[][] blockGeneration = loadLevel(0);
         spawnTerrain(blockGeneration);
@@ -34,7 +35,7 @@ public class Level0 extends Level {
     public void act() {
         followPlayer(scroll, player);
         updateCoin(coinLabel);
-        saveButton.setLocation(getWidth()-100, 40);
+        saveButton.setLocation(getWidth() - 100, 40);
         checkSaveButton();
         checkNext();
     }

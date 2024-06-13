@@ -28,6 +28,14 @@ public class Level extends World {
         setPaintOrder(Button.class, SuperDisplayLabel.class, Tile.class);
     }
 
+    public Level(int level) {
+        super(1280, 720, 1, false);
+        saveButtonImage.scale(150, 60);
+        saveButton.setImage(saveButtonImage);
+        setPaintOrder(Button.class, SuperDisplayLabel.class, Tile.class);
+        setLevel(level);
+    }
+
     public static void resetCoin() {
         totalCoins = 0;
     }
@@ -59,6 +67,10 @@ public class Level extends World {
                 Greenfoot.setWorld(end);
             }
         }
+    }
+
+    public void setLevel(int level) {
+        Level.level = level;
     }
 
     public int[] getWorldSize() {

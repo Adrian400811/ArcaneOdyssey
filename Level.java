@@ -9,6 +9,7 @@ public class Level extends World {
     protected static int totalCoins = 0;
     protected static int totalHP = 5;
     protected static int numOfCrown = 0;
+    private static int level = 0;
     private final int[] worldSize = {2560, 720};
     private final String background = "2dPixelForestBackground.png";
     private final Font font = new Font("Arial", 18);
@@ -17,7 +18,6 @@ public class Level extends World {
     protected Player player;
     protected SuperDisplayLabel coinLabel = new SuperDisplayLabel(Color.BLACK, Color.WHITE, font);
     protected Button saveButton = new Button();
-    private int level = 0;
     private Orb orb;
 
 
@@ -25,7 +25,7 @@ public class Level extends World {
         super(1280, 720, 1, false);
         saveButtonImage.scale(150, 60);
         saveButton.setImage(saveButtonImage);
-        setPaintOrder(Button.class,SuperDisplayLabel.class,Tile.class);
+        setPaintOrder(Button.class, SuperDisplayLabel.class, Tile.class);
     }
 
     public static void resetCoin() {
@@ -48,12 +48,13 @@ public class Level extends World {
 
     public void checkNext() {
         if (orb.isBeingTouched()) {
-            if (level == 0){
+            if (level == 0) {
                 levelUp();
                 Level1 world = new Level1();
                 Greenfoot.setWorld(world);
+                return;
             }
-            if (level == 1){
+            if (level == 1) {
                 EndScreen end = new EndScreen();
                 Greenfoot.setWorld(end);
             }

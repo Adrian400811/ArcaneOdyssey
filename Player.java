@@ -12,7 +12,7 @@ public class Player extends Actor {
     private static int speed;
     private final int dmg;
     private int hp;
-    private World w;
+    private Level w;
     private int jumpActs = 0;
     private int boostActs = 0;
 
@@ -22,7 +22,7 @@ public class Player extends Actor {
     }
 
     public void addedToWorld(World w) {
-        this.w = w;
+        this.w = (Level) w;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Player extends Actor {
     private void jump() {
         if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight() / 2) + 1, Brick.class) != null) {
             jumpActs = 30;
-        } 
+        }
         if (jumpActs > 15) {
             setLocation(getX(), getY() - 8);
         }
@@ -122,9 +122,10 @@ public class Player extends Actor {
 
     public void changeHP(int deltaHP) {
         hp += deltaHP;
+        w.setHP(hp);
     }
-    
-    public boolean touchingSpike(){
+
+    public boolean touchingSpike() {
         return (isTouching(Spike.class));
     }
 }

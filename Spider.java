@@ -27,6 +27,7 @@ public class Spider extends Mobs {
     }
 
     public void act() {
+        attackAct++;
         if (checkBlock() || checkY()) {
             holdAct--;
             hold();

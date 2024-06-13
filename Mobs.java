@@ -17,7 +17,8 @@ public abstract class Mobs extends SuperSmoothMover {
     public void addedToWorld(World w) {
         this.w = w;
     }
-    public void act(){
+
+    public void act() {
         stepped();
     }
 
@@ -110,12 +111,17 @@ public abstract class Mobs extends SuperSmoothMover {
         }
         return null;
     }
-    public void stepped(){
-        if(getOneObjectAtOffset(getX(), -(getImage().getHeight()/2), Player.class)!=null){
+
+    public void stepped() {
+        if (getWorld() == null) {
+            return;
+        }
+        if (getOneObjectAtOffset(getX(), -(getImage().getHeight() / 2), Player.class) != null) {
             getWorld().removeObject(this);
         }
     }
-    public void attack() {
+
+    public void attack(int dmg) {
         Player p = (Player) getOneIntersectingObject(Player.class);
         if (p == null) {
             return;

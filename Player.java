@@ -14,6 +14,7 @@ public class Player extends Actor {
     private int hp;
     private World w;
     private int jumpActs = 0;
+    private int boostActs = 0;
 
     public Player() {
         hp = 5;
@@ -30,6 +31,7 @@ public class Player extends Actor {
      */
     public void act() {
         jumpActs--;
+        boostActs--;
         movement();
         jump();
         fall();
@@ -52,15 +54,24 @@ public class Player extends Actor {
     private void jump() {
         if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight() / 2) + 1, Brick.class) != null) {
             jumpActs = 30;
-        }
+        } 
         if (jumpActs > 15) {
             setLocation(getX(), getY() - 8);
         }
+        if (boostActs > 15) {
+            setLocation(getX(), getY() - 32);
+        }
+    }
+
+    protected void jumpBoost() {
+        boostActs = 30;
     }
 
     private void fall() {
-        if (getOneObjectAtOffset(0, (getImage().getHeight() / 2) + 1, Brick.class) == null && jumpActs < 15) {
-            setLocation(getX(), getY() + 8);
+        if (getOneObjectAtOffset(getImage().getWidth() / 2 - 2, (getImage().getHeight() / 2) + 1, Brick.class) == null && jumpActs < 15) {
+            if (getOneObjectAtOffset(-(getImage().getWidth() / 2 - 2), (getImage().getHeight() / 2) + 1, Brick.class) == null && jumpActs < 15) {
+                setLocation(getX(), getY() + 8);
+            }
         }
     }
 
@@ -100,10 +111,9 @@ public class Player extends Actor {
     }
 
     private void checkHP() {
-        if (hp > 0) {
-            return;
+        if (hp <= 0) {
+            Greenfoot.setWorld(new GameOverScreen());
         }
-        w.removeObject(this);
     }
 
     public int getSpeed() {
@@ -112,5 +122,9 @@ public class Player extends Actor {
 
     public void changeHP(int deltaHP) {
         hp += deltaHP;
+    }
+    
+    public boolean touchingSpike(){
+        return (isTouching(Spike.class));
     }
 }

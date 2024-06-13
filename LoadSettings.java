@@ -96,4 +96,12 @@ public class LoadSettings extends World
         }
         return options;
     }
+    
+    public void stopped() {
+        TitleScreen.stopBGM();
+    }
+
+    public void started() {
+        TitleScreen.playBGM();
+    }
 }

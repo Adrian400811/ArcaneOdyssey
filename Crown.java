@@ -23,6 +23,7 @@ public class Crown extends Collection {
      */
     public void act() {
         if (isTouching(Player.class)){
+            playCollected();
             getWorld().removeObject(this);
             Level.addCrown();
         }

@@ -20,6 +20,8 @@ public class TitleScreen extends World
     private Button loadGame = new Button();
     private GreenfootImage loadImage = new GreenfootImage("loadGameImage.png");
     
+    private static GreenfootSound bgm = new GreenfootSound("bgm.mp3");
+    
     /**
      * Constructor for objects of class TitleScreen.
      * 
@@ -44,6 +46,9 @@ public class TitleScreen extends World
         // Load Button
         loadGame.setImage(loadImage);
         addObject(loadGame, 640, 450);
+        
+        // Background Music
+        bgm.setVolume(30);
     }
     
     public void act(){
@@ -59,5 +64,25 @@ public class TitleScreen extends World
             LoadSettings world = new LoadSettings();
             Greenfoot.setWorld(world);
         }
+    }
+    
+    /** Play background music if world has started */
+    public void started() {
+         bgm.playLoop();
+    }
+
+    /** Pause background music if world has stopped */
+    public void stopped() {
+        bgm.pause();
+    }
+
+    /** Method to stop background music from any world */
+    public static void stopBGM() {
+        bgm.pause();
+    }
+
+    /** Method to play background music from any world */
+    public static void playBGM() {
+        bgm.playLoop();
     }
 }

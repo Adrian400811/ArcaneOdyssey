@@ -68,4 +68,12 @@ public class EndScreen extends World
             Greenfoot.setWorld(title);
         }
     }
+    
+    public void stopped() {
+        TitleScreen.stopBGM();
+    }
+
+    public void started() {
+        TitleScreen.playBGM();
+    }
 }

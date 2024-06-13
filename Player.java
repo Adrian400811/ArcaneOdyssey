@@ -21,10 +21,12 @@ public class Player extends Actor {
     private boolean right, left, down, up, walking, isWaiting; 
     private int directionx, directiony; 
     protected int animIndex, animDelay, animCounter;
+    private GreenfootSound death = new GreenfootSound("death.mp3");
 
     public Player() {
         hp = 5;
         dmg = 1;
+        death.setVolume(100);
         
         R = new GreenfootImage[9];
         L = new GreenfootImage[9];
@@ -161,6 +163,7 @@ public class Player extends Actor {
             setLocation(getX(), 0);
         }
         if (getY() > w.getHeight()) {
+            changeHP(-6);
             setLocation(getX(), 0);
         }
     }
@@ -207,6 +210,7 @@ public class Player extends Actor {
 
     private void checkHP() {
         if (hp <= 0) {
+            death.play();
             Greenfoot.setWorld(new GameOverScreen());
         }
     }

@@ -1,10 +1,10 @@
 import greenfoot.*;
 
 /**
- * Write a description of class GameOverScreen here.
+ * Screen for when Player dies
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Jimmy
+ * @version June 13 2024
  */
 public class GameOverScreen extends World {
     private final Font font = new Font("Arial", 64);

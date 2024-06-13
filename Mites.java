@@ -1,6 +1,12 @@
 import greenfoot.GreenfootImage;
 import greenfoot.World;
 
+/**
+ * Mites Class
+ * 
+ * @author Adrian, Jason(graphics)
+ * @version June 13 2024
+ */
 public class Mites extends Mobs {
     private final int hp;
     private final int dmg;

@@ -6,10 +6,10 @@ import java.io.File;
 import java.util.StringTokenizer;
 
 /**
- * Write a description of class LoadSettings here.
+ * Load Screen for when people want to load their progress (coins,hp,level)
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jimmy
+ * @version June 13 2024
  */
 public class LoadSettings extends World
 {

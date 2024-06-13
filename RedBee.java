@@ -1,3 +1,10 @@
+/**
+ * RedBee Class
+ * 
+ * @author Adrian, Jason
+ * @version June 13 2024
+ */
+
 public class RedBee extends Bee {
     private final int range;
     private final int direction = 1;

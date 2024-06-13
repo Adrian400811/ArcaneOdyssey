@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EndScreen here.
+ * End Screen for the game
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jimmy
+ * @version June 13 2024
  */
 public class EndScreen extends World
 {

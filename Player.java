@@ -1,7 +1,7 @@
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
 import greenfoot.World;
-
+import greenfoot.*;
 /**
  * Write a description of class Player here.
  *
@@ -15,10 +15,45 @@ public class Player extends Actor {
     private World w;
     private int jumpActs = 0;
     private int boostActs = 0;
+    private GreenfootImage[] R, L, U, D;
+    private boolean right, left, down, up, walking, isWaiting; 
+    private int directionx, directiony; 
+    protected int animIndex, animDelay, animCounter;
 
     public Player() {
         hp = 5;
         dmg = 1;
+        
+        R = new GreenfootImage[9];
+        L = new GreenfootImage[9];
+        U = new GreenfootImage[9];
+        D = new GreenfootImage[9];
+        for(int i = 0; i < R.length; i++){
+                R[i] = new GreenfootImage("GuyR" + i + ".png");
+                R[i].scale(70,75);
+                L[i] = new GreenfootImage("GuyL" + i + ".png");
+                L[i].scale(70,75);
+                U[i] = new GreenfootImage("GuyR" + i + ".png"); 
+                U[i].scale(70,75);
+                D[i] = new GreenfootImage("GuyR" + i + ".png");
+                D[i].scale(70,75);
+            }
+        animDelay = 3;
+        setImage(R[0]);
+        
+    }
+    private void initAnim(){
+        
+        directionx = 1; 
+        directiony = 1;
+        walking = false; 
+        right = true;
+        left = false;
+        up = false;
+        down = false; 
+        animIndex = 0;
+        animDelay = 6;
+        animCounter = animDelay; 
     }
 
     public void addedToWorld(World w) {
@@ -38,16 +73,41 @@ public class Player extends Actor {
         collision();
         boundary();
         checkHP();
+        animate();
+        fixDirections(); 
     }
 
     private void movement() {
         if (Greenfoot.isKeyDown("D")) {
             setLocation(getX() + 8, getY());
             speed = 8;
+            directionx = 1;
         }
+    
         if (Greenfoot.isKeyDown("A")) {
             setLocation(getX() - 8, getY());
             speed = -8;
+            directionx = -1;
+        }
+        if (Greenfoot.isKeyDown("D")|| Greenfoot.isKeyDown("A")) {
+            walking = true;
+        }
+        else{
+            walking = false;
+            directionx = -1;
+        }
+
+           
+
+    }
+
+    private void fixDirections(){
+        if(directionx == 1){
+            right = true; 
+            left = false; 
+        } else{
+            left = true; 
+            right = false; 
         }
     }
 
@@ -108,6 +168,30 @@ public class Player extends Actor {
             setLocation(getX(), getY() - 1);
             jumpActs = 0;
         }
+    }
+    
+    private void animate(){
+        if(walking){
+            if(animCounter == 0){
+                System.out.println("Changing frame.");
+                animCounter = animDelay;
+                animIndex++;
+                if(animIndex == R.length){
+                    animIndex = 0; 
+                }
+            } else{
+                animCounter--; 
+            }
+            if(right){
+                setImage(R[animIndex]);
+            } else if(left){
+                setImage (L[animIndex]);
+            } else if (up){
+                setImage (U[animIndex]); 
+            } else if (down){
+                setImage (D[animIndex]); 
+            }
+        } 
     }
 
     private void checkHP() {

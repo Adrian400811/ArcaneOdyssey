@@ -14,6 +14,9 @@ public class GameOverScreen extends World {
     private final SuperDisplayLabel gameOverLabel = new SuperDisplayLabel(font);
     private final GreenfootImage gameOverImage = new GreenfootImage("gameOverInstructions.png");
 
+    private GreenfootImage playerImage = new GreenfootImage("GuyDeath.png");
+    private Button player = new Button();
+    
     /**
      * Constructor for objects of class GameOverScreen.
      */
@@ -36,7 +39,11 @@ public class GameOverScreen extends World {
         gameOverLabel.setImage(gameOverImage);
         gameOverLabel.setLocation(getWidth() / 2, 600);
 
-
+        //Add player
+        playerImage.scale(140,150);
+        player.setImage(playerImage);
+        addObject(player, getWidth()/2, getHeight()/2);
+        
     }
 
     public void act() {

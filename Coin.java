@@ -11,8 +11,9 @@ public class Coin extends Collection {
 
     public Coin() {
         image = new GreenfootImage("coin.png");
-        image.scale(45, 55);
+        image.scale(45,45);
         setImage(image);
+
     }
 
     /**

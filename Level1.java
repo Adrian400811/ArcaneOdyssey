@@ -9,7 +9,7 @@ import greenfoot.GreenfootImage;
 public class Level1 extends Level {
     private final ImgScroll scroll;
     private final Player player;
-    private final int[] worldSize = {2560, 720};
+    private final int[] worldSize = {2700, 720};
     private final String background = "2dSpaceBackground.png";
     private Orb orb;
 
@@ -20,19 +20,29 @@ public class Level1 extends Level {
         super();
         scroll = new ImgScroll(this, new GreenfootImage(background), worldSize[0], worldSize[1]);
         spawnFloor(scroll);
-        addObject(player = new Player(), 100, 622);
+        addObject(player = new Player(), 130, 135);
         addObject(coinLabel, 1100, 10);
-        coinLabel.update("Coins: " + totalCoins);
+        addObject(saveButton, getWidth() - 100, 40);
+        updateCoin(coinLabel);
 
         // Individual Block Placement
-        int[][] blockGeneration = new int[120][20];
-        blockGeneration[2][5] = 1;
+        int[][] blockGeneration = loadLevel(1);
         spawnTerrain(blockGeneration);
     }
 
     public void act() {
-        coinLabel.update("Coins: " + totalCoins);
-        coinLabel.setLocation(getWidth() / 2, 20);
-        scroll.scroll(getWidth() / 2 - player.getX(), getHeight() / 2 - player.getY());
+        followPlayer(scroll, player);
+        updateCoin(coinLabel);
+        saveButton.setLocation(getWidth()-100, 40);
+        checkSaveButton();
+        loseLife();
+        checkNext();
+    }
+    
+    private void loseLife(){
+        if (player.touchingSpike()){
+            player.changeHP(-5);
+            setHP(totalHP-5);
+        }
     }
 }

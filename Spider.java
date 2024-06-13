@@ -27,14 +27,15 @@ public class Spider extends Mobs {
     }
 
     public void act() {
-        if (checkBlock()) {
+        if (checkBlock() || checkY()) {
             holdAct--;
             hold();
         } else {
             movement();
         }
-        attack();
+        attack(dmg);
         timeout();
+        super.act();
     }
 
     protected void movement() {
@@ -60,20 +61,24 @@ public class Spider extends Mobs {
         return getOneIntersectingObject(Tile.class) != null;
     }
 
+    private boolean checkY() {
+        return (getY() < 0 || getY() > w.getHeight());
+    }
+
     public void timeout() {
         if (w == null) {
             return;
         }
-        if (!oob && (getX() < 0 || getX() > w.getWidth() || getY() < 0 || getY() > w.getHeight())) {
+        if (!oob && (getX() < 0)) {
             oob = true;
             startTime = System.currentTimeMillis();
         }
-        if (oob && !(getX() < 0 || getX() > w.getWidth() || getY() < 0 || getY() > w.getHeight())) {
+        if (oob && !(getX() < 0)) {
             oob = false;
         }
         if (oob) {
             long elapsedTime = System.currentTimeMillis() - startTime;
-            if (elapsedTime > 10 * 1000) {
+            if (elapsedTime > 10 * 1000 && getWorld() != null) {
                 w.removeObject(this);
             }
         }

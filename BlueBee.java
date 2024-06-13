@@ -20,9 +20,10 @@ public class BlueBee extends Bee {
     }
 
     public void act() {
-        super.act();
+        
         movement();
         collision();
+        super.act();
     }
 
     private void movement() {

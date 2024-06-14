@@ -1,10 +1,10 @@
 import greenfoot.GreenfootImage;
 
 /**
- * Write a description of class Level1 here.
+ * World for Level1 of the game
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Jimmy 
+ * @version June 13 2024
  */
 public class Level1 extends Level {
     private final ImgScroll scroll;
@@ -23,7 +23,7 @@ public class Level1 extends Level {
         addObject(player = new Player(), 130, 135);
         addObject(coinLabel, 1100, 10);
         addObject(saveButton, getWidth() - 100, 40);
-        updateCoin(coinLabel);
+        updateCoin();
 
         // Individual Block Placement
         int[][] blockGeneration = loadLevel(1);
@@ -32,17 +32,25 @@ public class Level1 extends Level {
 
     public void act() {
         followPlayer(scroll, player);
-        updateCoin(coinLabel);
-        saveButton.setLocation(getWidth()-100, 40);
+        updateCoin();
+        saveButton.setLocation(getWidth() - 100, 40);
         checkSaveButton();
         loseLife();
         checkNext();
     }
-    
-    private void loseLife(){
-        if (player.touchingSpike()){
+
+    private void loseLife() {
+        if (player.touchingSpike()) {
             player.changeHP(-5);
-            setHP(totalHP-5);
+            setHP(totalHP - 5);
         }
+    }
+    
+    public void stopped() {
+        TitleScreen.stopBGM();
+    }
+
+    public void started() {
+        TitleScreen.playBGM();
     }
 }

@@ -1,5 +1,11 @@
 import greenfoot.World;
 
+/**
+ * Bee Class
+ * 
+ * @author Adrian, Jason
+ * @version June 13 2024
+ */
 public abstract class Bee extends Mobs {
     private final int hp;
     private final int speed;
@@ -19,6 +25,7 @@ public abstract class Bee extends Mobs {
 
     @Override
     public void act() {
+        attackAct++;
         attack(dmg);
         collision();
         super.act();

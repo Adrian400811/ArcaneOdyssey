@@ -1,10 +1,10 @@
 import greenfoot.Actor;
 
 /**
- * Write a description of class Orb here.
+ * Orb class
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Jimmy
+ * @version June 13 2024
  */
 public class Orb extends Actor {
     /**
@@ -14,7 +14,12 @@ public class Orb extends Actor {
     public void act() {
         // Add your action code here.
     }
-
+    
+    /**
+     * Returns true if Orb is touching Player Class
+     * Returns false if Orb is not touching Player Class
+     * 
+     */
     public boolean isBeingTouched() {
         return isTouching(Player.class);
     }

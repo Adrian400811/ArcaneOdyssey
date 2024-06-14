@@ -3,15 +3,33 @@ import greenfoot.World;
 
 import java.util.List;
 
-public abstract class Mobs extends SuperSmoothMover {
-    public World w;
-    private int hp;
-    private int speed = 2;
-    private int dmg;
-    private int direction = 1;
+/**
+ * Mobs Class
+ * 
+ * @author Adrian, Jason
+ * @version June 13 2024
+ */
 
+public abstract class Mobs extends SuperSmoothMover {
+    protected World w;
+    protected int attackAct = 0;
+    protected int direction = 1;
+    protected int hp;
+    protected int speed = 2;
+    protected int dmg;
+
+    /**
+     * Constructor
+     */
     public Mobs() {
         enableStaticRotation();
+    }
+
+    protected void bounceWall(GreenfootImage image) {
+        if (getOneObjectAtOffset(direction * getImage().getWidth() + 2, 0, Tile.class) != null) {
+            direction *= -1;
+            image.mirrorHorizontally();
+        }
     }
 
     public void addedToWorld(World w) {
@@ -20,6 +38,7 @@ public abstract class Mobs extends SuperSmoothMover {
 
     public void act() {
         stepped();
+        attackAct++;
     }
 
     private void gravity() {
@@ -46,6 +65,9 @@ public abstract class Mobs extends SuperSmoothMover {
         }
     }
 
+    /**
+     * Checks for collision with the Brick class
+     */
     public void collision() {
         if (getOneObjectAtOffset(getImage().getWidth() / 2, 0, Brick.class) != null) {
             setLocation(getX() - speed, getY());
@@ -53,21 +75,6 @@ public abstract class Mobs extends SuperSmoothMover {
         if (getOneObjectAtOffset(-(getImage().getWidth() / 2), 0, Brick.class) != null) {
             setLocation(getX() + speed, getY());
         }
-    }
-
-    protected int bounceWall(int dir) {
-        if (getOneObjectAtOffset(dir * getImage().getWidth() + 1, 0, Tile.class) != null) {
-            dir *= -1;
-        }
-        return dir;
-    }
-
-    protected int bounceWall(int dir, GreenfootImage image) {
-        if (getOneObjectAtOffset(dir * getImage().getWidth() + 2, 0, Tile.class) != null) {
-            dir *= -1;
-            image.mirrorHorizontally();
-        }
-        return dir;
     }
 
     protected void idle() {
@@ -112,6 +119,9 @@ public abstract class Mobs extends SuperSmoothMover {
         return null;
     }
 
+    /**
+     * If stepped on by Player class, remove this mob
+     */
     public void stepped() {
         if (getWorld() == null) {
             return;
@@ -120,13 +130,18 @@ public abstract class Mobs extends SuperSmoothMover {
             getWorld().removeObject(this);
         }
     }
-
+    
+    /**
+     * Checks if Mob attacks Player and changes HP by dmg if Player gets hit
+     * 
+     * @param dmg       The amount to change Player HP by
+     */
     public void attack(int dmg) {
         Player p = (Player) getOneIntersectingObject(Player.class);
-        if (p == null) {
-            return;
+        if (p != null && attackAct > 60) {
+            attackAct = 0;
+            p.changeHP(-dmg);
         }
-        p.changeHP(-dmg);
     }
 
     public void changeHP(int deltaHP) {

@@ -1,15 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Button class for the game
+ * FriendlyCreatures Class
  * 
- * @author Jimmy
+ * @author Daniel
  * @version June 13 2024
  */
-public class Button extends Actor
+public class FriendlyCreatures extends SuperSmoothMover
 {
     /**
-     * Act - do whatever the Button wants to do. This method is called whenever
+     * Act - do whatever the FriendlyCreatures wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()

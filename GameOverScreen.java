@@ -1,10 +1,10 @@
 import greenfoot.*;
 
 /**
- * Write a description of class GameOverScreen here.
+ * Screen for when Player dies
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Jimmy
+ * @version June 13 2024
  */
 public class GameOverScreen extends World {
     private final Font font = new Font("Arial", 64);
@@ -14,6 +14,9 @@ public class GameOverScreen extends World {
     private final SuperDisplayLabel gameOverLabel = new SuperDisplayLabel(font);
     private final GreenfootImage gameOverImage = new GreenfootImage("gameOverInstructions.png");
 
+    private GreenfootImage playerImage = new GreenfootImage("GuyDeath.png");
+    private Button player = new Button();
+    
     /**
      * Constructor for objects of class GameOverScreen.
      */
@@ -36,7 +39,11 @@ public class GameOverScreen extends World {
         gameOverLabel.setImage(gameOverImage);
         gameOverLabel.setLocation(getWidth() / 2, 600);
 
-
+        //Add player
+        playerImage.scale(140,150);
+        player.setImage(playerImage);
+        addObject(player, getWidth()/2, getHeight()/2);
+        
     }
 
     public void act() {
@@ -48,5 +55,13 @@ public class GameOverScreen extends World {
             TitleScreen title = new TitleScreen();
             Greenfoot.setWorld(title);
         }
+    }
+    
+    public void stopped() {
+        TitleScreen.stopBGM();
+    }
+
+    public void started() {
+        TitleScreen.playBGM();
     }
 }

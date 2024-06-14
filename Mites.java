@@ -1,12 +1,17 @@
 import greenfoot.GreenfootImage;
 import greenfoot.World;
 
+/**
+ * Mites Class
+ * 
+ * @author Adrian, Jason(graphics)
+ * @version June 13 2024
+ */
 public class Mites extends Mobs {
     private final int hp;
     private final int dmg;
     private final int speed;
     private final GreenfootImage image;
-    private int direction = 1;
     private Level w;
     private int movementAct;
     private int jumpAct;
@@ -27,8 +32,9 @@ public class Mites extends Mobs {
     public void act() {
         movementAct--;
         jumpAct--;
+        attackAct++;
         movement();
-        direction = bounceWall(direction, image);
+        bounceWall(image);
         collision();
         fall();
         attack(dmg);

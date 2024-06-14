@@ -1,10 +1,10 @@
 import greenfoot.GreenfootImage;
 
 /**
- * Write a description of class Level0 here.
+ * World for Level0 of the game
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adrian
+ * @version June 13 2024
  */
 public class Level0 extends Level {
     private final ImgScroll scroll;
@@ -23,7 +23,7 @@ public class Level0 extends Level {
         addObject(player = new Player(), 100, 622);
         addObject(coinLabel, 1100, 10);
         addObject(saveButton, getWidth() - 100, 40);
-        updateCoin(coinLabel);
+        updateCoin();
         resetCoin();
         setHP(5);
         setLevel(0);
@@ -34,9 +34,17 @@ public class Level0 extends Level {
 
     public void act() {
         followPlayer(scroll, player);
-        updateCoin(coinLabel);
+        updateCoin();
         saveButton.setLocation(getWidth() - 100, 40);
         checkSaveButton();
         checkNext();
+    }
+    
+    public void stopped() {
+        TitleScreen.stopBGM();
+    }
+
+    public void started() {
+        TitleScreen.playBGM();
     }
 }

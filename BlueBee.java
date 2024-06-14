@@ -1,5 +1,11 @@
 import greenfoot.World;
 
+/**
+ * BlueBee Class
+ * 
+ * @author Adrian, Jason
+ * @version June 13 2024
+ */
 public class BlueBee extends Bee {
     private final int speed;
     private final int range;

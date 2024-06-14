@@ -7,16 +7,6 @@ import greenfoot.*;
  * @version June 13 2024
  */
 public class GameOverScreen extends World {
-    private final Font font = new Font("Arial", 64);
-    private final SuperDisplayLabel titleLabel = new SuperDisplayLabel(Color.WHITE, Color.BLACK, font);
-    private final GreenfootImage titleImage = new GreenfootImage("GameOverText.png");
-
-    private final SuperDisplayLabel gameOverLabel = new SuperDisplayLabel(font);
-    private final GreenfootImage gameOverImage = new GreenfootImage("gameOverInstructions.png");
-
-    private GreenfootImage playerImage = new GreenfootImage("GuyDeath.png");
-    private Button player = new Button();
-    
     /**
      * Constructor for objects of class GameOverScreen.
      */
@@ -28,22 +18,28 @@ public class GameOverScreen extends World {
         setBackground("brick.jpg");
 
         // Title
+        Font font = new Font("Arial", 64);
+        SuperDisplayLabel titleLabel = new SuperDisplayLabel(Color.WHITE, Color.BLACK, font);
         addObject(titleLabel, 600, 200);
+        GreenfootImage titleImage = new GreenfootImage("GameOverText.png");
         titleLabel.setImage(titleImage);
         titleLabel.setLocation(640, 150);
 
         // Instruction Label
+        SuperDisplayLabel gameOverLabel = new SuperDisplayLabel(font);
         addObject(gameOverLabel, getWidth() / 2, 600);
         gameOverLabel.update("Press 'enter' to go to the Title Screen");
+        GreenfootImage gameOverImage = new GreenfootImage("gameOverInstructions.png");
         gameOverImage.scale(1100, 60);
         gameOverLabel.setImage(gameOverImage);
         gameOverLabel.setLocation(getWidth() / 2, 600);
 
         //Add player
-        playerImage.scale(140,150);
+        GreenfootImage playerImage = new GreenfootImage("GuyDeath.png");
+        playerImage.scale(140, 150);
+        Button player = new Button();
         player.setImage(playerImage);
-        addObject(player, getWidth()/2, getHeight()/2);
-        
+        addObject(player, getWidth() / 2, getHeight() / 2);
     }
 
     public void act() {
@@ -56,7 +52,7 @@ public class GameOverScreen extends World {
             Greenfoot.setWorld(title);
         }
     }
-    
+
     public void stopped() {
         TitleScreen.stopBGM();
     }

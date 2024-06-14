@@ -1,7 +1,5 @@
-import greenfoot.Actor;
-import greenfoot.Greenfoot;
-import greenfoot.World;
 import greenfoot.*;
+
 /**
  * Player Class
  * Main Physics by Jimmy and Adrian
@@ -13,51 +11,54 @@ import greenfoot.*;
 public class Player extends Actor {
     private static int speed;
     private final int dmg;
+    private final GreenfootImage[] R;
+    private final GreenfootImage[] L;
+    private final GreenfootImage[] U;
+    private final GreenfootImage[] D;
+    private final GreenfootSound death = new GreenfootSound("death.mp3");
+    protected int animIndex, animDelay, animCounter;
     private int hp;
     private Level w;
     private int jumpActs = 0;
     private int boostActs = 0;
-    private GreenfootImage[] R, L, U, D;
-    private boolean right, left, down, up, walking, isWaiting; 
-    private int directionx, directiony; 
-    protected int animIndex, animDelay, animCounter;
-    private GreenfootSound death = new GreenfootSound("death.mp3");
+    private boolean right, left, down, up, walking, isWaiting;
+    private int directionx, directiony;
 
     public Player() {
         hp = 5;
         dmg = 1;
         death.setVolume(100);
-        
+
         R = new GreenfootImage[9];
         L = new GreenfootImage[9];
         U = new GreenfootImage[9];
         D = new GreenfootImage[9];
-        for(int i = 0; i < R.length; i++){
-                R[i] = new GreenfootImage("GuyR" + i + ".png");
-                R[i].scale(50,60);
-                L[i] = new GreenfootImage("GuyL" + i + ".png");
-                L[i].scale(50,60);
-                U[i] = new GreenfootImage("GuyR" + i + ".png"); 
-                U[i].scale(50,60);
-                D[i] = new GreenfootImage("GuyR" + i + ".png");
-                D[i].scale(50,60);
-            }
+        for (int i = 0; i < R.length; i++) {
+            R[i] = new GreenfootImage("GuyR" + i + ".png");
+            R[i].scale(50, 60);
+            L[i] = new GreenfootImage("GuyL" + i + ".png");
+            L[i].scale(50, 60);
+            U[i] = new GreenfootImage("GuyR" + i + ".png");
+            U[i].scale(50, 60);
+            D[i] = new GreenfootImage("GuyR" + i + ".png");
+            D[i].scale(50, 60);
+        }
         animDelay = 3;
         setImage(R[0]);
-        
+
     }
-    private void initAnim(){
-        
-        directionx = 1; 
+
+    private void initAnim() {
+        directionx = 1;
         directiony = 1;
-        walking = false; 
+        walking = false;
         right = true;
         left = false;
         up = false;
-        down = false; 
+        down = false;
         animIndex = 0;
         animDelay = 6;
-        animCounter = animDelay; 
+        animCounter = animDelay;
     }
 
     public void addedToWorld(World w) {
@@ -78,13 +79,11 @@ public class Player extends Actor {
         boundary();
         checkHP();
         animate();
-        fixDirections(); 
+        fixDirections();
     }
 
     /**
      * Movement for the Player
-     * 
-     * @return  void
      */
     private void movement() {
         if (Greenfoot.isKeyDown("D")) {
@@ -92,38 +91,34 @@ public class Player extends Actor {
             speed = 8;
             directionx = 1;
         }
-    
+
         if (Greenfoot.isKeyDown("A")) {
             setLocation(getX() - 8, getY());
             speed = -8;
             directionx = -1;
         }
-        if (Greenfoot.isKeyDown("D")|| Greenfoot.isKeyDown("A")) {
+        if (Greenfoot.isKeyDown("D") || Greenfoot.isKeyDown("A")) {
             walking = true;
-        }
-        else{
+        } else {
             walking = false;
             directionx = -1;
         }
 
-           
 
     }
 
-    private void fixDirections(){
-        if(directionx == 1){
-            right = true; 
-            left = false; 
-        } else{
-            left = true; 
-            right = false; 
+    private void fixDirections() {
+        if (directionx == 1) {
+            right = true;
+            left = false;
+        } else {
+            left = true;
+            right = false;
         }
     }
 
     /**
      * Jump method for the Player
-     * 
-     * @return  void
      */
     private void jump() {
         if (Greenfoot.isKeyDown("Space") && getOneObjectAtOffset(0, (getImage().getHeight() / 2) + 1, Brick.class) != null) {
@@ -184,28 +179,28 @@ public class Player extends Actor {
             jumpActs = 0;
         }
     }
-    
-    private void animate(){
-        if(walking){
-            if(animCounter == 0){
+
+    private void animate() {
+        if (walking) {
+            if (animCounter == 0) {
                 animCounter = animDelay;
                 animIndex++;
-                if(animIndex == R.length){
-                    animIndex = 0; 
+                if (animIndex == R.length) {
+                    animIndex = 0;
                 }
-            } else{
-                animCounter--; 
+            } else {
+                animCounter--;
             }
-            if(right){
+            if (right) {
                 setImage(R[animIndex]);
-            } else if(left){
-                setImage (L[animIndex]);
-            } else if (up){
-                setImage (U[animIndex]); 
-            } else if (down){
-                setImage (D[animIndex]); 
+            } else if (left) {
+                setImage(L[animIndex]);
+            } else if (up) {
+                setImage(U[animIndex]);
+            } else if (down) {
+                setImage(D[animIndex]);
             }
-        } 
+        }
     }
 
     private void checkHP() {
@@ -217,31 +212,30 @@ public class Player extends Actor {
 
     /**
      * Returns the speed for the Player
-     * 
+     *
      * @return int  speed of the Player
      */
     public int getSpeed() {
         return speed;
     }
-    
+
     /**
      * Change the HP for the Player
-     * 
-     * @param   int     amount of hp to be changed
-     * @return  void
+     *
+     * @param deltaHP amount of hp to be changed
      */
     public void changeHP(int deltaHP) {
         hp += deltaHP;
         w.setHP(hp);
     }
 
-    
+
     /**
      * Returns if the Player is touching a Spike
-     * 
+     *
      * @return boolean     true if it is touching Spike, false if not touching Spike
      */
-    public boolean touchingSpike(){
+    public boolean touchingSpike() {
         return (isTouching(Spike.class));
     }
 }

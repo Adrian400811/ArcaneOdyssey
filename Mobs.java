@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Mobs Class
- * 
+ *
  * @author Adrian, Jason
  * @version June 13 2024
  */
@@ -41,13 +41,13 @@ public abstract class Mobs extends SuperSmoothMover {
         attackAct++;
     }
 
-    private void gravity() {
+    protected void gravity() {
         if (!isTouching(Brick.class)) {
             setLocation(getX(), getY() + 2);
         }
     }
 
-    private void boundary() {
+    protected void boundary() {
         if (w == null) {
             return;
         }
@@ -130,11 +130,11 @@ public abstract class Mobs extends SuperSmoothMover {
             getWorld().removeObject(this);
         }
     }
-    
+
     /**
      * Checks if Mob attacks Player and changes HP by dmg if Player gets hit
-     * 
-     * @param dmg       The amount to change Player HP by
+     *
+     * @param dmg The amount to change Player HP by
      */
     public void attack(int dmg) {
         Player p = (Player) getOneIntersectingObject(Player.class);
@@ -146,14 +146,6 @@ public abstract class Mobs extends SuperSmoothMover {
 
     public void changeHP(int deltaHP) {
         hp += deltaHP;
-    }
-
-    public void changeSpeed(int deltaSpeed) {
-        speed += deltaSpeed;
-    }
-
-    public int getHP() {
-        return hp;
     }
 
     public int getSpeed() {

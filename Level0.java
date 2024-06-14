@@ -7,10 +7,7 @@ import greenfoot.GreenfootImage;
  * @version June 13 2024
  */
 public class Level0 extends Level {
-    private final ImgScroll scroll;
     private final Player player;
-    private final int[] worldSize = {7680, 720};
-    private Orb orb;
 
     /**
      * Constructor for objects of class Level0.
@@ -18,6 +15,7 @@ public class Level0 extends Level {
     public Level0() {
         super();
         String background = "2dPixelForestBackground.png";
+        int[] worldSize = {7680, 720};
         scroll = new ImgScroll(this, new GreenfootImage(background), worldSize[0], worldSize[1]);
         spawnFloor(scroll);
         addObject(player = new Player(), 100, 622);
@@ -33,13 +31,13 @@ public class Level0 extends Level {
     }
 
     public void act() {
-        followPlayer(scroll, player);
+        followPlayer(player);
         updateCoin();
         saveButton.setLocation(getWidth() - 100, 40);
         checkSaveButton();
         checkNext();
     }
-    
+
     public void stopped() {
         TitleScreen.stopBGM();
     }

@@ -3,7 +3,7 @@ import greenfoot.World;
 
 /**
  * Spider Class
- * 
+ *
  * @author Adrian, Jason(graphics)
  * @version June 13 2024
  */
@@ -11,7 +11,6 @@ public class Spider extends Mobs {
     private final int hp;
     private final double speed;
     private final int dmg;
-    private final GreenfootImage image;
     private World w;
     private int direction = 1;
     private long startTime;
@@ -23,7 +22,7 @@ public class Spider extends Mobs {
         hp = 2;
         speed = 1;
         dmg = 1;
-        image = new GreenfootImage("spider.png");
+        GreenfootImage image = new GreenfootImage("spider.png");
         image.scale(47, 64);
         setImage(image);
     }

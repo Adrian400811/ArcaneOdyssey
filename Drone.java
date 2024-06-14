@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Drone here.
+ * Drone Class
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Daniel
+ * @version June 13 2024
  */
 public class Drone extends FriendlyCreatures
 {

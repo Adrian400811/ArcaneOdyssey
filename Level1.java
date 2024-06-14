@@ -1,13 +1,12 @@
 import greenfoot.GreenfootImage;
 
 /**
- * Write a description of class Level1 here.
+ * World for Level1 of the game
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Jimmy
+ * @version June 13 2024
  */
 public class Level1 extends Level {
-    private final ImgScroll scroll;
     private final Player player;
     private final int[] worldSize = {2700, 720};
     private final String background = "2dSpaceBackground.png";
@@ -31,7 +30,7 @@ public class Level1 extends Level {
     }
 
     public void act() {
-        followPlayer(scroll, player);
+        followPlayer(player);
         updateCoin();
         saveButton.setLocation(getWidth() - 100, 40);
         checkSaveButton();
@@ -44,5 +43,13 @@ public class Level1 extends Level {
             player.changeHP(-5);
             setHP(totalHP - 5);
         }
+    }
+
+    public void stopped() {
+        TitleScreen.stopBGM();
+    }
+
+    public void started() {
+        TitleScreen.playBGM();
     }
 }

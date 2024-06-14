@@ -1,10 +1,16 @@
 import greenfoot.World;
 
+/**
+ * BlueBee Class
+ *
+ * @author Adrian, Jason
+ * @version June 13 2024
+ */
 public class BlueBee extends Bee {
     private final int speed;
     private final int range;
     private final int direction;
-    private World w;
+    private Level w;
     private int[] anchor;
 
     public BlueBee() {
@@ -15,12 +21,13 @@ public class BlueBee extends Bee {
     }
 
     public void addedToWorld(World w) {
+        this.w = (Level) w;
         super.addedToWorld(w);
         anchor = new int[]{getX(), getY()};
     }
 
     public void act() {
-        
+
         movement();
         collision();
         super.act();

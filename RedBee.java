@@ -1,6 +1,12 @@
+/**
+ * RedBee Class
+ *
+ * @author Adrian, Jason
+ * @version June 13 2024
+ */
+
 public class RedBee extends Bee {
     private final int range;
-    private final int direction = 1;
     private int hp;
     private int curSpeed;
     private int speed;
@@ -18,7 +24,7 @@ public class RedBee extends Bee {
 
     @Override
     public void act() {
-        
+
         curSpeed = speed;
         if (getPlayer(range) != null) {
             sprint();

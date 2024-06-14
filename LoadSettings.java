@@ -1,76 +1,70 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileNotFoundException;
-import java.io.File;
 import java.util.StringTokenizer;
 
 /**
- * Write a description of class LoadSettings here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Load Screen for when people want to load their progress (coins,hp,level)
+ *
+ * @author Jimmy
+ * @version June 13 2024
  */
-public class LoadSettings extends World
-{
-    
-    private Font font = new Font("Arial", 64);
-    private SuperDisplayLabel titleLabel = new SuperDisplayLabel(Color.WHITE, Color.BLACK, font);
-    private GreenfootImage titleImage = new GreenfootImage("ArcaneOdysseyLogo.png");
-    
-    private Button load1 = new Button();
-    private GreenfootImage loadImage1 = new GreenfootImage("saveFile1.png");
-    
+public class LoadSettings extends World {
+    private final Button load1 = new Button();
 
     /**
      * Constructor for objects of class LoadSettings.
-     * 
      */
-    public LoadSettings()
-    {    
-        super(1280, 720, 1); 
-        
+    public LoadSettings() {
+        super(1280, 720, 1);
+
         // Background
         setBackground("WorldBackground.jpg");
-        
+
         // Title
+        Font font = new Font("Arial", 64);
+        SuperDisplayLabel titleLabel = new SuperDisplayLabel(Color.WHITE, Color.BLACK, font);
         addObject(titleLabel, 600, 200);
+        GreenfootImage titleImage = new GreenfootImage("ArcaneOdysseyLogo.png");
         titleLabel.setImage(titleImage);
-        titleLabel.setLocation(640,150);
-        
+        titleLabel.setLocation(640, 150);
+
         // Load Button 1
+        GreenfootImage loadImage1 = new GreenfootImage("saveFile1.png");
         load1.setImage(loadImage1);
         addObject(load1, 640, 300);
-        
     }
-    
-    public void act(){
+
+    public void act() {
         checkPressed();
     }
-    
-    private void checkPressed(){
-        if (Greenfoot.mouseClicked(load1)){
+
+    private void checkPressed() {
+        if (Greenfoot.mouseClicked(load1)) {
             int[] savedOptions = loadSave();
             int savedHP = savedOptions[0];
             int savedCoins = savedOptions[1];
             int savedLevel = savedOptions[2];
-            
-            if (savedLevel == 0){
+
+            if (savedLevel == 0) {
                 Level0 level = new Level0();
                 Greenfoot.setWorld(level);
                 level.setHP(savedHP);
                 level.setCoins(savedCoins);
             }
-            if (savedLevel == 1){
+            if (savedLevel == 1) {
                 Level1 level = new Level1();
                 Greenfoot.setWorld(level);
                 level.setHP(savedHP);
                 level.setCoins(savedCoins);
             }
-            
+
         }
     }
-    
+
     public int[] loadSave() {
         ArrayList<String> data = new ArrayList<String>();
         Scanner scan = null;
@@ -95,5 +89,13 @@ public class LoadSettings extends World
             options[2] = (Integer.parseInt(lineData.get(2))); // level
         }
         return options;
+    }
+
+    public void stopped() {
+        TitleScreen.stopBGM();
+    }
+
+    public void started() {
+        TitleScreen.playBGM();
     }
 }
